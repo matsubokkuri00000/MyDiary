@@ -1,13 +1,8 @@
-const DiaryList = ({ diaryList })=>{
+import Diary from "./Diary";
+
+const DiaryList = ({ diaryList, handleDeleteDiary, handleUpadateDiary })=>{
   const result = diaryList.map((diary)=>{
-      return (
-        <article key={diary.id}>
-          <p>タイトル：{diary.title}</p>
-          <p>日時：{diary.date}</p>
-          <p>本文：{diary.mainText}</p>
-          <p>----------------</p>
-        </article>
-      )
+      return <Diary key={diary.id} diary={diary} handleDeleteDiary={handleDeleteDiary} handleUpadateDiary={handleUpadateDiary}/>
   });
 
   return result;

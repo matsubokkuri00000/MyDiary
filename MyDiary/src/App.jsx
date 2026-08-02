@@ -23,13 +23,46 @@ function App (){
     setDiaryList(newDiaryList);
   }
 
+  const handleDeleteDiary = (ID)=> {
+    const newDiary = diaryList.filter((diary)=>{
+      if( diary.id != ID ){
+        return diary;
+      }
+    });
+
+    console.log("削除した日記のID：", ID);
+    setDiaryList(newDiary);
+  }
+
+  const handleUpadateDiary = (ID, newTitle, newDiary)=>{
+    const newDiaryList = diaryList.map((diary)=>{
+      if(diary.id === ID){
+        return {
+          ...diary,
+          title: newTitle,
+          mainText: newDiary,
+          date: now.toLocaleString()
+        }
+      };
+
+      return diary;
+    });
+    
+    console.log("編集後の配列", newDiaryList);
+    setDiaryList(newDiaryList);
+  }
+
   return (
     <>
       <h1>Diary</h1>
-      <DiaryForm setDiaryList={handleAddDiary}/>
+      <DiaryForm handleAddDiary={handleAddDiary}/>
 
         <p>----一覧表示-----</p>
-      <DiaryList diaryList={diaryList}/>
+      <DiaryList 
+        diaryList={diaryList}
+        handleDeleteDiary={handleDeleteDiary}
+        handleUpadateDiary={handleUpadateDiary}
+      />
     </>
   )
 }
