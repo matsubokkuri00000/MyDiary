@@ -35,6 +35,8 @@ function App (){
   }
 
   const handleUpadateDiary = (ID, newTitle, newDiary)=>{
+    const now = new Date();
+
     const newDiaryList = diaryList.map((diary)=>{
       if(diary.id === ID){
         return {
