@@ -1,48 +1,47 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useState } from "react"
+import { v4 as uuidv4 } from "uuid"
 
-const DiaryForm = ()=>{
-  const [title, setTitle] = useState("");
-  const [diary, setDiary] = useState("");
-  const [diaryList, setDiaryList] = useState([]);
+const DiaryForm = ({ setDiaryList })=>{
+  const [diary_title, setTitle] = useState("");
+  const [diary_main, setMainDiary] = useState("");
 
-  const handleInputTitle = (event)=>{
+  
+  const handleTitle = (event)=>{
     setTitle(event.target.value);
   }
-
-  const handleInputDiary = (event)=>{
-    setDiary(event.target.value)
+  const handleMainDiary = (event)=>{
+    setMainDiary(event.target.value);
   }
 
-  const handleEntryDiary = ()=>{
-    const newDiarys = [
-      ...diaryList,
-      {
-        id:uuidv4(),
-        title:title,
-        diary:diary
-      }
-    ]
+  const handleSaveButton = ()=>{
 
-    setDiaryList(newDiarys);
-
+    setDiaryList(diary_title, diary_main);
+  
     setTitle("");
-    setDiary("");
-    console.log(newDiarys);
+    setMainDiary("");
   }
+
+
 
   return (
     <>
+      <p>------入力フォーム------</p>
+      
       <div>
-        <p>タイトル</p>
-        <input value={title} onChange={handleInputTitle}></input>
+        <label>
+          <p>タイトル：{diary_title}</p>
+          <input value={diary_title} onChange={handleTitle}/>
+        </label>
       </div>
 
       <div>
-        <p>本文</p>
-        <textarea value={diary} onChange={handleInputDiary}></textarea>
+        <label>
+          <p>本文：</p>
+          <textarea value={diary_main} onChange={handleMainDiary}/>
+        </label>
       </div>
-      <button onClick={handleEntryDiary}>保存</button>
+
+      <button onClick={handleSaveButton}>保存</button>
     </>
   )
 }
