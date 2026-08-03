@@ -2,8 +2,8 @@ import { useState } from "react";
 
 const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
     const [isEditing, setEditing] = useState(false);
-    const [new_diary_title, setNewTitle] = useState("");
-    const [new_diary_main, setNewMainDiary] = useState("");
+    const [new_diary_title, setNewTitle] = useState(diary.title);
+    const [new_diary_main, setNewMainDiary] = useState(diary.mainText);
 
     const handleDelete = ()=>{
         handleDeleteDiary(diary.id);
@@ -27,6 +27,7 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
         setEditing(!isEditing);
     }
 
+
     if(isEditing){
         return (
             <>
@@ -35,10 +36,10 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
                 <div>
                     <label>
                         <p>タイトル：</p>
-                        <input onChange={handleUpdateTitle}></input></label>
+                        <input value={new_diary_title} onChange={handleUpdateTitle}></input></label>
                     <label>
                         <p>本文</p>
-                        <textarea onChange={handleUpdateMainDiary}></textarea>
+                        <textarea value={new_diary_main} onChange={handleUpdateMainDiary}></textarea>
                     </label>
                 </div>
 
