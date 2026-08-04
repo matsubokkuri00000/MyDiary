@@ -2,11 +2,13 @@ import { useState } from "react";
 import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
 import { v4 as uuidv4 } from "uuid";
+import { supabase } from "./supabase";
 
 function App (){
   const [diaryList, setDiaryList] = useState([]);
 
-  const handleAddDiary = (diary_title, diary_main)=>{
+  const handleAddDiary = async (diary_title, diary_main)=>{
+    /*
     const now = new Date();
 
     const newDiaryList =[
@@ -21,7 +23,25 @@ function App (){
 
     console.log("更新後配列：", newDiaryList);
     setDiaryList(newDiaryList);
+    */
+
+    const { data, error } = await supabase
+      .from("diaries")
+      .insert([
+        {
+          title: diary_title,
+          main_text: diary_main
+        }
+      ]);
+
+      if(error){
+        console.log(error);
+      } else {
+        console.log(data);
+      }
+
   }
+
 
   const handleDeleteDiary = (ID)=> {
     const newDiary = diaryList.filter((diary)=>{
@@ -53,6 +73,9 @@ function App (){
     console.log("編集後の配列", newDiaryList);
     setDiaryList(newDiaryList);
   }
+
+
+  console.log(supabase);
 
   return (
     <>

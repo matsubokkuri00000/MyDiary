@@ -14,11 +14,12 @@ const DiaryForm = ({ handleAddDiary })=>{
   }
 
   const handleSaveButton = ()=>{
+  /*
     if (diary_title.trim() === "" && diary_main.trim() === ""){
       return;
     }
-    
-
+  */
+ 
     handleAddDiary(diary_title, diary_main);
   
     setTitle("");
