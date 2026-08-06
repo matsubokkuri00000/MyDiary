@@ -51,9 +51,9 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
 
     return (
         <article>
-            <p>日時：{diary.date}</p>
+            <p>日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
             <p>タイトル：{diary.title}</p>
-            <p>本文：{diary.mainText}</p>
+            <p>本文：{diary.main_text}</p>
 
             <button onClick={handleDelete}>削除</button>
             <button onClick={handleEditMode}>編集</button>

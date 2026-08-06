@@ -16,8 +16,7 @@ function App (){
           title: diary_title,
           main_text: diary_main
         }
-      ])
-      .select("*");
+      ]);
 
       if(error){
         console.log(error);
@@ -67,8 +66,10 @@ function App (){
       return;
     }
 
-    console.log(data);
-    setDiaryList(data);
+    const reverseData = [...data].reverse()
+
+    console.log(reverseData);
+    setDiaryList(reverseData);
   } 
 
   //console.log(supabase);
