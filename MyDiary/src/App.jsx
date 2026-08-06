@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
 import { v4 as uuidv4 } from "uuid";
@@ -8,40 +8,23 @@ function App (){
   const [diaryList, setDiaryList] = useState([]);
 
   const handleAddDiary = async (diary_title, diary_main)=>{
-    /*
-    const now = new Date();
 
-    const newDiaryList =[
-      ...diaryList,
-      {
-        id:uuidv4(),
-        title: diary_title,
-        mainText: diary_main,
-        date: now.toLocaleString()
-      }
-    ]
-
-    console.log("更新後配列：", newDiaryList);
-    setDiaryList(newDiaryList);
-    */
-
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("diaries")
       .insert([
         {
           title: diary_title,
           main_text: diary_main
         }
-      ]);
+      ])
+      .select("*");
 
       if(error){
         console.log(error);
-      } else {
-        console.log(data);
       }
 
+      await fetchDiaries();
   }
-
 
   const handleDeleteDiary = (ID)=> {
     const newDiary = diaryList.filter((diary)=>{
@@ -74,9 +57,29 @@ function App (){
     setDiaryList(newDiaryList);
   }
 
+  const fetchDiaries = async ()=>{
+    const { data, error } = await supabase
+      .from("diaries")
+      .select("*");
 
-  console.log(supabase);
+    if(error){
+      console.log(error);
+      return;
+    }
 
+    console.log(data);
+    setDiaryList(data);
+  } 
+
+  //console.log(supabase);
+
+  useEffect(()=>{
+
+    fetchDiaries();
+
+  },[]);
+
+  
   return (
     <>
       <h1>Diary</h1>
