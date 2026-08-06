@@ -40,24 +40,22 @@ function App (){
       await fetchDiaries();
   }
 
-  const handleUpadateDiary = (ID, newTitle, newDiary)=>{
-    const now = new Date();
+  const handleUpadateDiary = async (ID, newTitle, newDiary)=>{
 
-    const newDiaryList = diaryList.map((diary)=>{
-      if(diary.id === ID){
-        return {
-          ...diary,
-          title: newTitle,
-          mainText: newDiary,
-          date: now.toLocaleString()
-        }
-      };
+    const { error } = await supabase
+      .from("diaries")
+      .update({
+        title: newTitle,
+        main_text: newDiary
+      })
+      .eq("id", ID)
 
-      return diary;
-    });
-    
-    console.log("編集後の配列", newDiaryList);
-    setDiaryList(newDiaryList);
+      if(error){
+        console.log(error);
+        return;
+      }
+
+    await fetchDiaries();
   }
 
   const fetchDiaries = async ()=>{
