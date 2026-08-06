@@ -25,15 +25,19 @@ function App (){
       await fetchDiaries();
   }
 
-  const handleDeleteDiary = (ID)=> {
-    const newDiary = diaryList.filter((diary)=>{
-      if( diary.id != ID ){
-        return diary;
-      }
-    });
+  const handleDeleteDiary = async (ID)=> {
 
-    console.log("削除した日記のID：", ID);
-    setDiaryList(newDiary);
+    const { error } = await supabase
+      .from("diaries")
+      .delete()
+      .eq("id", ID)
+
+    if(error){
+      console.log(error);
+      return;
+    }
+
+      await fetchDiaries();
   }
 
   const handleUpadateDiary = (ID, newTitle, newDiary)=>{
@@ -71,8 +75,6 @@ function App (){
     console.log(reverseData);
     setDiaryList(reverseData);
   } 
-
-  //console.log(supabase);
 
   useEffect(()=>{
 
