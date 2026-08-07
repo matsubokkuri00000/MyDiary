@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
     const [isEditing, setEditing] = useState(false);
+    const [updated, setUpdated] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
     const [new_diary_main, setNewMainDiary] = useState(diary.main_text);
 
@@ -49,9 +50,24 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
         );
     }
 
+    if(diary.created_at != diary.updated_at){
+        return(
+            <>
+                <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
+                <p>更新日時：{new Date(diary.updated_at).toLocaleString("ja-JP")}</p>
+                <p>タイトル：{diary.title}</p>
+                <p>本文：{diary.main_text}</p>
+
+                <button onClick={handleDelete}>削除</button>
+                <button onClick={handleEditMode}>編集</button>
+                <p>---------------------</p>
+            </>
+        )
+    }
+
     return (
         <article>
-            <p>日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
+            <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
             <p>タイトル：{diary.title}</p>
             <p>本文：{diary.main_text}</p>
 
