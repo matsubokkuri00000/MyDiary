@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
-import { v4 as uuidv4 } from "uuid";
-import { supabase } from "./supabase";
+import useDiaries from "./useDiaries";
 
 function App (){
+/*
   const [diaryList, setDiaryList] = useState([]);
+*/
 
+  const { diaryList, fetchDiaries, addDiary, deleteDiary, upadateDiary } = useDiaries();
+
+/*
   const handleAddDiary = async (diary_title, diary_main)=>{
 
     const { error } = await supabase
@@ -79,18 +83,19 @@ function App (){
     fetchDiaries();
 
   },[]);
+  */
 
   
   return (
     <>
       <h1>Diary</h1>
-      <DiaryForm handleAddDiary={handleAddDiary}/>
+      <DiaryForm handleAddDiary={addDiary}/>
 
         <p>----一覧表示-----</p>
       <DiaryList 
         diaryList={diaryList}
-        handleDeleteDiary={handleDeleteDiary}
-        handleUpadateDiary={handleUpadateDiary}
+        handleDeleteDiary={deleteDiary}
+        handleUpadateDiary={upadateDiary}
       />
     </>
   )
