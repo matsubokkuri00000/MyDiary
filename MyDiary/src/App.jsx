@@ -3,12 +3,15 @@ import DiaryList from "./DiaryList";
 import useDiaries from "./useDiaries";
 
 function App (){
-  const { diaryList, addDiary, deleteDiary, upadateDiary } = useDiaries();
+  const { diaryList, loading, addDiary, deleteDiary, upadateDiary } = useDiaries();
   
   return (
     <>
       <h1>Diary</h1>
-      <DiaryForm handleAddDiary={addDiary}/>
+      <DiaryForm 
+        handleAddDiary={addDiary}
+        loading={loading}  
+      />
 
         <p>----一覧表示-----</p>
       <DiaryList 
