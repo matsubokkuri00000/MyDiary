@@ -3,72 +3,119 @@ import { supabase } from "./supabase";
 
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    //実験用
+    const sleep = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 
     const fetchDiaries = async ()=>{
-        const { data, error } = await supabase
-            .from("diaries")
-            .select("*");
 
-        if(error){
+        try {
+            setLoading(true);
+
+            const { data, error } = await supabase
+                .from("diaries")
+                .select("*");
+            
+            //supabase関連に対するerror
+            if(error){
+                console.log(error);
+                return;
+            }
+
+            const reverseData = [...data].reverse()
+
+            setDiaryList(reverseData);
+            
+        } catch (error) {
             console.log(error);
-            return;
+        } finally {
+            setLoading(false);
         }
-
-        const reverseData = [...data].reverse()
-
-        console.log(reverseData);
-        setDiaryList(reverseData);
-
     } 
 
     const addDiary = async (diary_title, diary_main)=>{
-        const { error } = await supabase
-        .from("diaries")
-        .insert([
-            {
-            title: diary_title,
-            main_text: diary_main
+
+        try {
+            setLoading(true);
+
+            const { error } = await supabase
+                .from("diaries")
+                .insert([
+                    {
+                    title: diary_title,
+                    main_text: diary_main
+                    }
+                ]);
+
+            if(error){
+                console.log(error);
             }
-        ]);
 
-        if(error){
+            await fetchDiaries();
+
+            //await sleep(10000);
+
+        } catch (error) {
             console.log(error);
+            return;
+        } finally {
+            setLoading(false);
         }
-
-        await fetchDiaries();
     }
 
     const deleteDiary = async (ID)=> {
 
-        const { error } = await supabase
-        .from("diaries")
-        .delete()
-        .eq("id", ID)
+        try {
+            setLoading(true);
 
-        if(error){
-        console.log(error);
-        return;
+            const { error } = await supabase
+                .from("diaries")
+                .delete()
+                .eq("id", ID)
+
+            if(error){
+            console.log(error);
+            return;
+            }
+
+            await fetchDiaries();
+            
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
         }
 
-        await fetchDiaries();
     }
 
     const upadateDiary = async (ID, newTitle, newDiary)=>{
 
-        const { error } = await supabase
-        .from("diaries")
-        .update({
-            title: newTitle,
-            main_text: newDiary
-        })
-        .eq("id", ID)
+        try {
+            setLoading(true);
 
-        if(error){
+            const { error } = await supabase
+                .from("diaries")
+                .update({
+                    title: newTitle,
+                    main_text: newDiary
+                })
+                .eq("id", ID)
+
+            if(error){
+                console.log(error);
+                return;
+            }
+
+            await fetchDiaries();
+            
+        } catch (error) {
             console.log(error);
-            return;
+        } finally {
+            setLoading(false);
         }
-
-        await fetchDiaries();
     }
 
 
@@ -82,6 +129,7 @@ const useDiaries = ()=>{
 
     return {
         diaryList,
+        loading,
         addDiary,
         deleteDiary,
         upadateDiary

@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-const DiaryForm = ({ handleAddDiary })=>{
+const DiaryForm = ({ handleAddDiary, loading })=>{
   const [diary_title, setTitle] = useState("");
   const [diary_main, setMainDiary] = useState("");
 
@@ -39,7 +39,12 @@ const DiaryForm = ({ handleAddDiary })=>{
         </label>
       </div>
 
-      <button onClick={handleSaveButton}>保存</button>
+      <button 
+        onClick={handleSaveButton}
+        disabled={loading}
+      >
+        {loading ? "保存中..." : "保存"}
+      </button>
     </>
   )
 }
