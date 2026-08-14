@@ -82,7 +82,9 @@ const useDiaries = ()=>{
 
     return {
         diaryList,
-        fetchDiaries
+        addDiary,
+        deleteDiary,
+        upadateDiary
     };
 }
 

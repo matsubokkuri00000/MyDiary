@@ -21,8 +21,6 @@ const DiaryForm = ({ handleAddDiary })=>{
     setMainDiary("");
   }
 
-
-
   return (
     <>
       <p>------入力フォーム------</p>
