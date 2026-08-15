@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { supabase } from "./supabase";
+import useAuth from "./useAuth";
 
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [user, setUser] = useState(null);
+
+    const { user, getCurrentUser, signUp, signIn, signOut } = useAuth();
 
     //実験用
     const sleep = (ms) => {
@@ -39,8 +41,6 @@ const useDiaries = ()=>{
 
     const addDiary = async (diary_title, diary_main)=>{
 
-        getCurrentUser();
-
         try {
             setLoading(true);
 
@@ -48,8 +48,9 @@ const useDiaries = ()=>{
                 .from("diaries")
                 .insert([
                     {
-                    title: diary_title,
-                    main_text: diary_main
+                        user_id : user.id,
+                        title: diary_title,
+                        main_text: diary_main
                     }
                 ]);
 
@@ -118,24 +119,6 @@ const useDiaries = ()=>{
             console.log(error);
         } finally {
             setLoading(false);
-        }
-    }
-
-    const getCurrentUser = async ()=>{
-
-        try {
-            const { data, error } = await supabase.auth.getUser();
-
-            if(error){
-                console.log(error);
-                return;
-            }
-
-            console.log("custom Hook : ", data.user);
-            setUser(data.user);
-
-        } catch (error) {
-            console.log(error);
         }
     }
 

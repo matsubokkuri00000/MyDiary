@@ -3,89 +3,25 @@ import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
 import { supabase } from "./supabase";
 import useDiaries from "./useDiaries";
+import useAuth from "./useAuth";
 
 function App (){
-  const [user, setUser] = useState(null);
-
   const { diaryList, addDiary, deleteDiary, upadateDiary } = useDiaries();
-
-  const handleSignUp = async ()=>{
-    
-    const { data, error } = await supabase.auth.signUp({
-      email: "...",
-      password: "..."
-    })
-
-    if(error){
-      console.log(error);
-      return;
-    }
-
-    console.log(data);
-  }
-  
-  const handleSignIn = async ()=>{
-    
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: "venulucifer20@gmail.com",
-      password: "lovelove235"
-    });
-
-    if(error){
-      console.log(error);
-      return;
-    }
-
-    console.log(data);
-    console.log(data.user);
-    
-    setUser(data.user);
-  }
-
-  const handleSignOut = async ()=>{
-
-    const { error } = await supabase.auth.signOut();
-
-    if(error){
-      console.log(error);
-      return;
-    }
-
-    setUser(null);
-
-  }
+  const { user, getCurrentUser, signUp, signIn, signOut } = useAuth();
 
   useEffect(()=>{
-
-    const getCurrentUser = async ()=>{
-      try {
-        const { data, error } = await supabase.auth.getUser();
-      
-        if(error){
-          console.log(error);
-          return;
-        }
-
-        setUser(data.user);
-        
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    getCurrentUser();
-
+    console.log("App.jsx 初回レンダリング");
   },[]);
 
   return (
     <>
-      <button onClick={handleSignUp}>
+      <button onClick={signUp}>
         ユーザ登録
       </button>
-      <button onClick={handleSignIn}>
+      <button onClick={signIn}>
         ログイン
       </button>
-      <button onClick={handleSignOut}>
+      <button onClick={signOut}>
         ログアウト
       </button>
       <p>ログイン中のユーザ：{user?.email}</p>
