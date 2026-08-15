@@ -38,7 +38,8 @@ function App (){
 
     console.log(data);
     console.log(data.user);
-    console.log(data.user.id);
+    
+    setUser(data.user);
   }
 
   const handleSignOut = async ()=>{
@@ -57,14 +58,19 @@ function App (){
   useEffect(()=>{
 
     const getCurrentUser = async ()=>{
-      const { data, error } = await supabase.auth.getUser();
+      try {
+        const { data, error } = await supabase.auth.getUser();
       
-      if(error){
-        console.log(error);
-        return;
-      }
+        if(error){
+          console.log(error);
+          return;
+        }
 
-      setUser(data.user);
+        setUser(data.user);
+        
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     getCurrentUser();
