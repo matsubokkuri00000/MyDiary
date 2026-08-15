@@ -43,8 +43,8 @@ const useAuth = ()=>{
     const signIn = async ()=>{
         
         const { data, error } = await supabase.auth.signInWithPassword({
-            email: "...",
-            password: "..."
+            email: "matsubokkuri00000@gmail.com",
+            password: "lovelove235"
         });
 
         if(error){
@@ -72,9 +72,18 @@ const useAuth = ()=>{
 
     }
 
+    const handleAuthStateChange = (event, session)=>{
+        console.log(event);
+        console.log(session);
+
+        setUser(session?.user ?? null);
+    }
+
     useEffect(()=>{
 
         getCurrentUser();
+
+        supabase.auth.onAuthStateChange(handleAuthStateChange);
 
     },[])
 
