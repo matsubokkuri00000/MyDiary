@@ -83,7 +83,11 @@ const useAuth = ()=>{
 
         getCurrentUser();
 
-        supabase.auth.onAuthStateChange(handleAuthStateChange);
+        const { data } = supabase.auth.onAuthStateChange(handleAuthStateChange);
+
+        return ()=>{
+            data.subscription.unsubscribe();
+        }
 
     },[])
 
