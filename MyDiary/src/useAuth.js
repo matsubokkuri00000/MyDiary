@@ -3,11 +3,14 @@ import { useEffect, useState } from "react";
 
 const useAuth = ()=>{
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     //ログイン情報を取得
     const getCurrentUser = async ()=>{
 
         try {
+            setLoading(true);
+
             const { data, error } = await supabase.auth.getUser();
 
             if(error){
@@ -15,11 +18,13 @@ const useAuth = ()=>{
                 return;
             }
 
-            console.log("user ID : ", data.user.id);
+            //console.log("user ID : ", data.user.id);
             setUser(data.user);
 
         } catch (error) {
             console.log(error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -41,21 +46,27 @@ const useAuth = ()=>{
     
     //ログイン
     const signIn = async ()=>{
-        
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: "matsubokkuri00000@gmail.com",
-            password: "lovelove235"
-        });
 
-        if(error){
-            console.log(error);
-            return;
+        try {
+            setLoading(true);
+
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: "...",
+                password: "..."
+            });
+
+            if(error){
+                console.log(error);
+                return;
+            }
+
+            setUser(data.user);
+            
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false);
         }
-
-        console.log(data);
-        console.log(data.user);
-        
-        setUser(data.user);
     }
 
     //ログアウト
@@ -72,9 +83,12 @@ const useAuth = ()=>{
 
     }
 
+    //Supabase側でログイン状態を監視する
     const handleAuthStateChange = (event, session)=>{
+        /*
         console.log(event);
         console.log(session);
+        */
 
         setUser(session?.user ?? null);
     }
@@ -93,6 +107,7 @@ const useAuth = ()=>{
 
     return ({
         user,
+        loading,
         getCurrentUser,
         signUp,
         signIn,
