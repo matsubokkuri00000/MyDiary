@@ -124,9 +124,14 @@ const useDiaries = ()=>{
 
     useEffect(()=>{
 
+        if(!user){
+            setDiaryList([]);
+            return;
+        }
+
         fetchDiaries();
 
-    },[]);
+    },[user]);
 
 
     return {

@@ -88,7 +88,7 @@ const useAuth = ()=>{
     //Supabase側でログイン状態を監視する
     const handleAuthStateChange = (event, session)=>{
         //console.log(event);
-        console.log(session);
+        //console.log(session);
 
         setUser(session?.user ?? null);
     }

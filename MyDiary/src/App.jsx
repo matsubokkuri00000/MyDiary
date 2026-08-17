@@ -4,7 +4,7 @@ import DiaryList from "./DiaryList";
 import { supabase } from "./supabase";
 import useDiaries from "./useDiaries";
 import useAuth from "./useAuth";
-import AuthUI from "./AuthUI";
+import Auth from "./Auth";
 
 function App (){
   const { diaryList, addDiary, deleteDiary, upadateDiary } = useDiaries();
@@ -31,7 +31,7 @@ function App (){
         </>
       ):(
         <>
-          <AuthUI />
+          <Auth />
         </>
         )
       }
