@@ -11,8 +11,6 @@ function App (){
   const { diaryList, addDiary, deleteDiary, upadateDiary } = useDiaries();
   const { user, loading, getCurrentUser, signUp, signIn, signOut } = useAuth();
 
-  const { users, setUsers } = useContext(AuthContext)
-  console.log(users);
 
   return (
     <>
