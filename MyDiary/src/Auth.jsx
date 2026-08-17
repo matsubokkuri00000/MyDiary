@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useAuth from "./useAuth";
 
-const AuthUI = ()=>{
+const Auth = ()=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { signIn, signUp } = useAuth();
@@ -48,4 +48,4 @@ const AuthUI = ()=>{
     )
 }
 
-export default AuthUI;
+export default Auth;
