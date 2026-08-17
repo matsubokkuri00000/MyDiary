@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
 import { supabase } from "./supabase";
 import useDiaries from "./useDiaries";
 import useAuth from "./useAuth";
 import Auth from "./Auth";
+import AuthContext from "./AuthContext";
 
 function App (){
   const { diaryList, addDiary, deleteDiary, upadateDiary } = useDiaries();
   const { user, loading, getCurrentUser, signUp, signIn, signOut } = useAuth();
+
+  const { users, setUsers } = useContext(AuthContext)
+  console.log(users);
 
   return (
     <>
