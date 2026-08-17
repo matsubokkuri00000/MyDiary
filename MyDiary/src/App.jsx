@@ -4,6 +4,7 @@ import DiaryList from "./DiaryList";
 import { supabase } from "./supabase";
 import useDiaries from "./useDiaries";
 import useAuth from "./useAuth";
+import AuthUI from "./AuthUI";
 
 function App (){
   const { diaryList, addDiary, deleteDiary, upadateDiary } = useDiaries();
@@ -30,12 +31,7 @@ function App (){
         </>
       ):(
         <>
-          <button onClick={signUp}>
-            ユーザ登録
-          </button>
-          <button onClick={signIn}>
-            ログイン
-          </button>
+          <AuthUI />
         </>
         )
       }

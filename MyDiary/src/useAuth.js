@@ -29,11 +29,11 @@ const useAuth = ()=>{
     }
 
     //新規登録
-    const signUp = async ()=>{
+    const signUp = async (email, password)=>{
         
         const { data, error } = await supabase.auth.signUp({
-            email: "...",
-            password: "..."
+            email: email,
+            password: password
         })
 
         if(error){
@@ -45,22 +45,24 @@ const useAuth = ()=>{
     }
     
     //ログイン
-    const signIn = async ()=>{
+    const signIn = async (email, password)=>{
 
         try {
             setLoading(true);
 
             const { data, error } = await supabase.auth.signInWithPassword({
-                email: "...",
-                password: "..."
+                email: email,
+                password: password
             });
+
+            console.log(data);
 
             if(error){
                 console.log(error);
                 return;
             }
 
-            setUser(data.user);
+            //setUser(data.user);
             
         } catch (error) {
             console.log(error)
@@ -79,16 +81,14 @@ const useAuth = ()=>{
             return;
         }
 
-        setUser(null);
+        //setUser(null);
 
     }
 
     //Supabase側でログイン状態を監視する
     const handleAuthStateChange = (event, session)=>{
-        /*
-        console.log(event);
+        //console.log(event);
         console.log(session);
-        */
 
         setUser(session?.user ?? null);
     }
