@@ -2,8 +2,6 @@ import { supabase } from "./supabase";
 import { useEffect, useState } from "react";
 
 const useAuth = ()=>{
-    console.log("useAuth実行");
-
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -89,9 +87,7 @@ const useAuth = ()=>{
 
     //Supabase側でログイン状態を監視する
     const handleAuthStateChange = (event, session)=>{
-        //console.log(event);
-        //console.log(session);
-
+        
         setUser(session?.user ?? null);
     }
 
