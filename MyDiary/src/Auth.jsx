@@ -1,13 +1,10 @@
 import { useContext, useState } from "react";
-import useAuth from "./useAuth";
 import AuthContext from "./AuthContext";
 
 const Auth = ()=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { signIn, signUp } = useAuth();
-
-    const { users, setUsers } = useContext(AuthContext);
+    const { user, loading, getCurrentUser, signUp, signIn, signOut } = useContext(AuthContext);
 
     const handleEmailAddress = (event) => {
         setEmail(event.target.value)
@@ -56,10 +53,6 @@ const Auth = ()=>{
                 ログイン
             </button>
 
-            <button onClick={handleTestLogin}>
-                Contextテストログイン
-            </button>
-            <p>Contextのユーザ：{users?.email}</p>
         </>
     )
 }

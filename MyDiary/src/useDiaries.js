@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { supabase } from "./supabase";
-import useAuth from "./useAuth";
+import AuthContext from "./AuthContext";
 
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    const { user, getCurrentUser, signUp, signIn, signOut } = useAuth();
+    const { user, getCurrentUser, signUp, signIn, signOut } = useContext(AuthContext);
 
     //実験用
     const sleep = (ms) => {

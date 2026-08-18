@@ -2,6 +2,8 @@ import { supabase } from "./supabase";
 import { useEffect, useState } from "react";
 
 const useAuth = ()=>{
+    console.log("useAuth実行");
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -18,7 +20,7 @@ const useAuth = ()=>{
                 return;
             }
 
-            //console.log("user ID : ", data.user.id);
+            console.log("user ID : ", data.user.id);
             setUser(data.user);
 
         } catch (error) {
