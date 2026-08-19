@@ -5,14 +5,13 @@ import DiaryPage from "./DiaryPage";
 import { Route, Routes, Navigate } from "react-router-dom";
 
 function App (){
-  const { user, loading, getCurrentUser, signUp, signIn, signOut } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   if(loading){
     return <p>認証情報を確認中...</p>
   }
 
   return (
-    <>
       <Routes>
         <Route 
           path="/"
@@ -42,7 +41,6 @@ function App (){
         />
 
       </Routes>  
-    </>
   )
 }
 
