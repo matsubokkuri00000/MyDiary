@@ -14,14 +14,6 @@ const Auth = ()=>{
         setPassword(event.target.value)
     }
 
-    const handleTestLogin = () => {
-        setUsers({
-            email: "test@example.com"
-        })
-    }
-
-
-
     return(
         <>
             <h1>ログイン画面</h1>
