@@ -16,6 +16,8 @@ const DiaryPage = () => {
             </button>
             <p>ログイン中のユーザ：{user?.email}</p>
 
+            {errorMessage && <p>{errorMessage}</p>}
+
             <h1>Diary</h1>
             {fetchLoading
                 ? (
