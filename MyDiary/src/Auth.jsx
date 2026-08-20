@@ -4,7 +4,7 @@ import AuthContext from "./AuthContext";
 const Auth = ()=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { user, loading, getCurrentUser, signUp, signIn, signOut } = useContext(AuthContext);
+    const { errorMessage, signUp, signIn } = useContext(AuthContext);
 
     const handleEmailAddress = (event) => {
         setEmail(event.target.value)
@@ -45,6 +45,7 @@ const Auth = ()=>{
                 ログイン
             </button>
 
+            {errorMessage && <p>{errorMessage}</p>}
         </>
     )
 }

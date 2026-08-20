@@ -4,17 +4,25 @@ import { useEffect, useState } from "react";
 const useAuth = ()=>{
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState("");
 
     //ログイン情報を取得
     const getCurrentUser = async ()=>{
 
         try {
             setLoading(true);
+            setErrorMessage("");
 
             const { data, error } = await supabase.auth.getUser();
 
             if(error){
                 console.log(error);
+                setErrorMessage("ログインしてください");
+                return;
+            }
+
+            if (!data.user) {
+                setUser(null);
                 return;
             }
 
@@ -23,6 +31,7 @@ const useAuth = ()=>{
 
         } catch (error) {
             console.log(error);
+            setErrorMessage("予期しないエラーが発生しました");
         } finally {
             setLoading(false);
         }
@@ -31,17 +40,27 @@ const useAuth = ()=>{
     //新規登録
     const signUp = async (email, password)=>{
         
-        const { data, error } = await supabase.auth.signUp({
-            email: email,
-            password: password
-        })
+        try {
+            setLoading(true);
+            setErrorMessage("");
 
-        if(error){
+            const { error } = await supabase.auth.signUp({
+                email,
+                password
+            })
+
+            if(error){
+                console.log(error);
+                setErrorMessage("登録に失敗しました");
+                return;
+            }
+            
+        } catch (error) {
             console.log(error);
-            return;
+            setErrorMessage("予期しないエラーが発生しました");
+        } finally {
+            setLoading(false);
         }
-
-        console.log(data);
     }
     
     //ログイン
@@ -49,21 +68,24 @@ const useAuth = ()=>{
 
         try {
             setLoading(true);
+            setErrorMessage("");
 
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email: email,
-                password: password
+            const { error } = await supabase.auth.signInWithPassword({
+                email,
+                password
             });
 
             if(error){
                 console.log(error);
+                setErrorMessage("ログインできませんでした");
                 return;
             }
 
             //setUser(data.user);
             
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            setErrorMessage("予期しないエラーが発生しました");
         } finally {
             setLoading(false);
         }
@@ -72,14 +94,24 @@ const useAuth = ()=>{
     //ログアウト
     const signOut = async ()=>{
 
-        const { error } = await supabase.auth.signOut();
+        try {
+            setLoading(true);
+            setErrorMessage("");
 
-        if(error){
+            const { error } = await supabase.auth.signOut();
+
+            if(error){
+                console.log(error);
+                setErrorMessage("ログアウトに失敗しました");
+                return;
+            }
+
+        } catch (error) {
             console.log(error);
-            return;
+            setErrorMessage("予期しないエラーが発生しました");
+        } finally {
+            setLoading(false);
         }
-
-        //setUser(null);
 
     }
 
@@ -104,6 +136,7 @@ const useAuth = ()=>{
     return ({
         user,
         loading,
+        errorMessage,
         getCurrentUser,
         signUp,
         signIn,

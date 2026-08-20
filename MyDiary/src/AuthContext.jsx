@@ -6,10 +6,10 @@ const AuthContext = createContext();
 
 const AuthProvider = ({children})=>{
     //const [users, setUsers] = useState(null);
-    const { user, loading, getCurrentUser, signUp, signIn, signOut } = useAuth();
+    const { user, loading, errorMessage, getCurrentUser, signUp, signIn, signOut } = useAuth();
 
     return (
-        <AuthContext.Provider value={{ user, loading, getCurrentUser, signUp, signIn, signOut }}>
+        <AuthContext.Provider value={{ user, loading, errorMessage, getCurrentUser, signUp, signIn, signOut }}>
             {children}
         </AuthContext.Provider>
     )
