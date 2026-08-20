@@ -16,6 +16,26 @@ const Auth = ()=>{
         setPassword(event.target.value)
     }
 
+    const handleSignUp = () => {
+        if( !email || !password ){
+            setInputError("メールアドレスとパスワードを入力してください");
+            return;
+        }
+
+        setInputError("");
+        signUp(email, password);
+    }
+
+    const handleSignIn = () => {
+        if ( !email || !password ){
+            setInputError("メールアドレスとパスワードを入力してください");
+            return;   
+        }
+
+        setInputError("");
+        signIn(email, password);
+    }
+
     return(
         <>
             <h1>ログイン画面</h1>
@@ -33,6 +53,7 @@ const Auth = ()=>{
                 <label>
                     <p>パスワード</p>
                     <input 
+                        type="password"
                         value={password}
                         onChange={handlePassword}
                         placeholder="password"
@@ -40,13 +61,14 @@ const Auth = ()=>{
                 </label>
             </div>
 
-            <button onClick={()=>signUp(email, password)}>
+            <button onClick={handleSignUp}>
                 ユーザ登録
             </button>
-            <button onClick={()=>signIn(email, password)}>
+            <button onClick={handleSignIn}>
                 ログイン
             </button>
 
+            {inputError && <p>{inputError}</p>}
             {errorMessage && <p>{errorMessage}</p>}
         </>
     )
