@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-const DiaryForm = ({ handleAddDiary, addLoading, deleteLoading })=>{
+const DiaryForm = ({ handleAddDiary, addLoading })=>{
   const [diary_title, setTitle] = useState("");
   const [diary_main, setMainDiary] = useState("");
 

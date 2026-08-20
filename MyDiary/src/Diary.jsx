@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
+const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, updateLoading })=>{
     const [isEditing, setEditing] = useState(false);
     const [updated, setUpdated] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
@@ -44,7 +44,12 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
                     </label>
                 </div>
 
-                <button onClick={handleSaveEditDiary}>保存</button>
+                <button 
+                    onClick={handleSaveEditDiary}
+                    disabled={updateLoading}
+                >
+                    {updateLoading ? "保存中..." : "保存"}
+                </button>
                 <button onClick={handleEditMode}>キャンセル</button>
             </>
         );
@@ -71,7 +76,12 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary })=>{
             <p>タイトル：{diary.title}</p>
             <p>本文：{diary.main_text}</p>
 
-            <button onClick={handleDelete}>削除</button>
+            <button 
+                onClick={handleDelete}
+                disabled={deleteLoading}
+            >
+                {deleteLoading ? "削除中..." : "削除"}
+            </button>
             <button onClick={handleEditMode}>編集</button>
             <p>---------------------</p>
         </article>

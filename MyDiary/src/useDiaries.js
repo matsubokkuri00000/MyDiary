@@ -4,31 +4,26 @@ import AuthContext from "./AuthContext";
 
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [fetchLoading, setFetchLoading] = useState(true);
     const [addLoading, setAddLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [updateLoading, setUpdateLoading] = useState(false);
-    const { user, getCurrentUser, signUp, signIn, signOut } = useContext(AuthContext);
-
-    //実験用
-    const sleep = (ms) => {
-        return new Promise(resolve => setTimeout(resolve, ms));
-    }
+    const { user } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const fetchDiaries = async ()=>{
 
         try {
-            //setLoading(true);
             setFetchLoading(true);
+            setErrorMessage("");
 
             const { data, error } = await supabase
                 .from("diaries")
                 .select("*");
             
-            //supabase関連に対するerror
             if(error){
                 console.log(error);
+                setErrorMessage("日記一覧の取得に失敗しました");
                 return;
             }
 
@@ -38,8 +33,8 @@ const useDiaries = ()=>{
             
         } catch (error) {
             console.log(error);
+            setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            //setLoading(false);
             setFetchLoading(false);
         }
     } 
@@ -47,8 +42,8 @@ const useDiaries = ()=>{
     const addDiary = async (diary_title, diary_main)=>{
 
         try {
-            //setLoading(true);
             setAddLoading(true);
+            setErrorMessage("");
 
             const { error } = await supabase
                 .from("diaries")
@@ -62,17 +57,17 @@ const useDiaries = ()=>{
 
             if(error){
                 console.log(error);
+                setErrorMessage("日記の追加に失敗しました");
+                return
             }
 
             await fetchDiaries();
 
-            //await sleep(10000);
-
         } catch (error) {
             console.log(error);
+            setErrorMessage("予期しないエラーが発生しました");
             return;
         } finally {
-            //setLoading(false);
             setAddLoading(false);
         }
     }
@@ -80,8 +75,8 @@ const useDiaries = ()=>{
     const deleteDiary = async (ID)=> {
 
         try {
-            setLoading(true);
-            //setDeleteLoading(true);
+            setDeleteLoading(true);
+            setErrorMessage("");
 
             const { error } = await supabase
                 .from("diaries")
@@ -89,17 +84,18 @@ const useDiaries = ()=>{
                 .eq("id", ID)
 
             if(error){
-            console.log(error);
-            return;
+                console.log(error);
+                setErrorMessage("日記の削除に失敗しました");
+                return;
             }
 
             await fetchDiaries();
             
         } catch (error) {
             console.log(error);
+            setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setLoading(false);
-            //setDeleteLoading(false);
+            setDeleteLoading(false);
         }
 
     }
@@ -107,8 +103,8 @@ const useDiaries = ()=>{
     const upadateDiary = async (ID, newTitle, newDiary)=>{
 
         try {
-            setLoading(true);
-            //setUpdateLoading(true);
+            setUpdateLoading(true);
+            setErrorMessage("");
 
             const { error } = await supabase
                 .from("diaries")
@@ -120,6 +116,7 @@ const useDiaries = ()=>{
 
             if(error){
                 console.log(error);
+                setErrorMessage("日記の更新に失敗しました");
                 return;
             }
 
@@ -127,9 +124,9 @@ const useDiaries = ()=>{
             
         } catch (error) {
             console.log(error);
+            setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setLoading(true);
-            //setUpdateLoading(false);
+            setUpdateLoading(false);
         }
     }
 
@@ -147,11 +144,11 @@ const useDiaries = ()=>{
 
     return {
         diaryList,
-        loading,
+        fetchLoading,
         addLoading,
         deleteLoading,
-        fetchLoading,
         updateLoading,
+        errorMessage,
         addDiary,
         deleteDiary,
         upadateDiary

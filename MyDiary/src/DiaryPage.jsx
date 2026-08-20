@@ -6,7 +6,7 @@ import DiaryList from "./DiaryList";
 import LoadingUI from "./LoadingUI";
 
 const DiaryPage = () => {
-    const { diaryList, addLoading, deleteLoading, fetchLoading, updateLoading, addDiary, deleteDiary, upadateDiary } = useDiaries();
+    const {diaryList, fetchLoading, addLoading, deleteLoading, updateLoading, errorMessage, addDiary, deleteDiary, upadateDiary} = useDiaries();
     const { user, signOut } = useContext(AuthContext);
 
      return (
@@ -26,7 +26,6 @@ const DiaryPage = () => {
                         <DiaryForm 
                             handleAddDiary={addDiary}
                             addLoading={addLoading}
-                            deleteLoading={deleteLoading}
                         />
 
                         <p>----一覧表示-----</p>
@@ -34,6 +33,8 @@ const DiaryPage = () => {
                             diaryList={diaryList}
                             handleDeleteDiary={deleteDiary}
                             handleUpadateDiary={upadateDiary}
+                            deleteLoading={deleteLoading}
+                            updateLoading={updateLoading}
                         />
                     </>
                 )
