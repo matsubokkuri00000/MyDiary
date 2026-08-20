@@ -4,6 +4,8 @@ import AuthContext from "./AuthContext";
 const Auth = ()=>{
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [inputError, setInputError] = useState("");
+ 
     const { errorMessage, signUp, signIn } = useContext(AuthContext);
 
     const handleEmailAddress = (event) => {
