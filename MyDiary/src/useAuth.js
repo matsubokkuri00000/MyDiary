@@ -55,8 +55,6 @@ const useAuth = ()=>{
                 password: password
             });
 
-            console.log(data);
-
             if(error){
                 console.log(error);
                 return;

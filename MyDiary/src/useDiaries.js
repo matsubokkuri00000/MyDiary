@@ -5,7 +5,7 @@ import AuthContext from "./AuthContext";
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [fetchLoading, setFetchLoading] = useState(false);
+    const [fetchLoading, setFetchLoading] = useState(true);
     const [addLoading, setAddLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [updateLoading, setUpdateLoading] = useState(false);
@@ -19,8 +19,8 @@ const useDiaries = ()=>{
     const fetchDiaries = async ()=>{
 
         try {
-            setLoading(true);
-            //setFetchLoading(true);
+            //setLoading(true);
+            setFetchLoading(true);
 
             const { data, error } = await supabase
                 .from("diaries")
@@ -39,8 +39,8 @@ const useDiaries = ()=>{
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false);
-            //setFetchLoading(false);
+            //setLoading(false);
+            setFetchLoading(false);
         }
     } 
 

@@ -3,6 +3,7 @@ import AuthContext from "./AuthContext";
 import useDiaries from "./useDiaries";
 import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
+import LoadingUI from "./LoadingUI";
 
 const DiaryPage = () => {
     const { diaryList,loading, addLoading, deleteLoading, fetchLoading, updateLoading, addDiary, deleteDiary, upadateDiary } = useDiaries();
@@ -16,18 +17,29 @@ const DiaryPage = () => {
             <p>ログイン中のユーザ：{user?.email}</p>
 
             <h1>Diary</h1>
-            <DiaryForm 
-                handleAddDiary={addDiary}
-                addLoading={addLoading}
-                deleteLoading={deleteLoading}
-            />
+            {fetchLoading
+                ? (
+                    <>
+                        <LoadingUI />
+                    </>
+                )
+                :(
+                    <>
+                        <DiaryForm 
+                            handleAddDiary={addDiary}
+                            addLoading={addLoading}
+                            deleteLoading={deleteLoading}
+                        />
 
-            <p>----一覧表示-----</p>
-            <DiaryList 
-                diaryList={diaryList}
-                handleDeleteDiary={deleteDiary}
-                handleUpadateDiary={upadateDiary}
-            />
+                        <p>----一覧表示-----</p>
+                        <DiaryList 
+                            diaryList={diaryList}
+                            handleDeleteDiary={deleteDiary}
+                            handleUpadateDiary={upadateDiary}
+                        />
+                    </>
+                )
+            }
         </>
      )
 }
