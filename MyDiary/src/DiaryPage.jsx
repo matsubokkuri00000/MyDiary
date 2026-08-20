@@ -5,7 +5,7 @@ import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
 
 const DiaryPage = () => {
-    const { diaryList,loading, addDiary, deleteDiary, upadateDiary } = useDiaries();
+    const { diaryList,loading, addLoading, deleteLoading, fetchLoading, updateLoading, addDiary, deleteDiary, upadateDiary } = useDiaries();
     const { user, signOut } = useContext(AuthContext);
 
      return (
@@ -16,7 +16,11 @@ const DiaryPage = () => {
             <p>ログイン中のユーザ：{user?.email}</p>
 
             <h1>Diary</h1>
-            <DiaryForm handleAddDiary={addDiary}/>
+            <DiaryForm 
+                handleAddDiary={addDiary}
+                addLoading={addLoading}
+                deleteLoading={deleteLoading}
+            />
 
             <p>----一覧表示-----</p>
             <DiaryList 

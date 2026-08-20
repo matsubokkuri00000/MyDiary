@@ -5,6 +5,10 @@ import AuthContext from "./AuthContext";
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [fetchLoading, setFetchLoading] = useState(false);
+    const [addLoading, setAddLoading] = useState(false);
+    const [deleteLoading, setDeleteLoading] = useState(false);
+    const [updateLoading, setUpdateLoading] = useState(false);
     const { user, getCurrentUser, signUp, signIn, signOut } = useContext(AuthContext);
 
     //実験用
@@ -16,6 +20,7 @@ const useDiaries = ()=>{
 
         try {
             setLoading(true);
+            //setFetchLoading(true);
 
             const { data, error } = await supabase
                 .from("diaries")
@@ -35,13 +40,15 @@ const useDiaries = ()=>{
             console.log(error);
         } finally {
             setLoading(false);
+            //setFetchLoading(false);
         }
     } 
 
     const addDiary = async (diary_title, diary_main)=>{
 
         try {
-            setLoading(true);
+            //setLoading(true);
+            setAddLoading(true);
 
             const { error } = await supabase
                 .from("diaries")
@@ -65,7 +72,8 @@ const useDiaries = ()=>{
             console.log(error);
             return;
         } finally {
-            setLoading(false);
+            //setLoading(false);
+            setAddLoading(false);
         }
     }
 
@@ -73,6 +81,7 @@ const useDiaries = ()=>{
 
         try {
             setLoading(true);
+            //setDeleteLoading(true);
 
             const { error } = await supabase
                 .from("diaries")
@@ -90,6 +99,7 @@ const useDiaries = ()=>{
             console.log(error);
         } finally {
             setLoading(false);
+            //setDeleteLoading(false);
         }
 
     }
@@ -98,6 +108,7 @@ const useDiaries = ()=>{
 
         try {
             setLoading(true);
+            //setUpdateLoading(true);
 
             const { error } = await supabase
                 .from("diaries")
@@ -117,7 +128,8 @@ const useDiaries = ()=>{
         } catch (error) {
             console.log(error);
         } finally {
-            setLoading(false);
+            setLoading(true);
+            //setUpdateLoading(false);
         }
     }
 
@@ -136,6 +148,10 @@ const useDiaries = ()=>{
     return {
         diaryList,
         loading,
+        addLoading,
+        deleteLoading,
+        fetchLoading,
+        updateLoading,
         addDiary,
         deleteDiary,
         upadateDiary
