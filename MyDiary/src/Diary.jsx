@@ -2,7 +2,6 @@ import { useState } from "react";
 
 const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, updateLoading, deletingID })=>{
     const [isEditing, setEditing] = useState(false);
-    const [updated, setUpdated] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
     const [new_diary_main, setNewMainDiary] = useState(diary.main_text);
 

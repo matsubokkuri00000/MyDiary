@@ -13,6 +13,13 @@ const useDiaries = ()=>{
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
 
+    //テスト用
+    const sleep = (ms) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, ms);
+        });
+    };
+
     const showSuccessMessage = (message) => {
         setSuccessMessage(message);
         setTimeout(() => {
@@ -93,6 +100,9 @@ const useDiaries = ()=>{
             setErrorMessage("");
             setSuccessMessage("");
 
+            //テスト用
+            await sleep(3000);
+
             const { error } = await supabase
                 .from("diaries")
                 .delete()
@@ -124,6 +134,9 @@ const useDiaries = ()=>{
             setUpdateLoading(true);
             setErrorMessage("");
             setSuccessMessage("");
+
+            //テスト用
+            await sleep(3000);
 
             const { error } = await supabase
                 .from("diaries")
