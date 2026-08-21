@@ -6,10 +6,18 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deletingID, updat
     const [new_diary_main, setNewMainDiary] = useState(diary.main_text);
 
     const handleDelete = ()=>{
+        const result = window.confirm("この日記を削除しますか？");
+
+        if(!result){
+            return ;
+        }
+
+
         handleDeleteDiary(diary.id);
     }
 
     const handleEditMode = ()=>{
+
         setEditing(true);
     }
     
