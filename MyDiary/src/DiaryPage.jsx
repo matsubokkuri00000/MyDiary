@@ -32,13 +32,20 @@ const DiaryPage = () => {
                         />
 
                         <p>----一覧表示-----</p>
-                        <DiaryList 
-                            diaryList={diaryList}
-                            handleDeleteDiary={deleteDiary}
-                            handleUpadateDiary={upadateDiary}
-                            updatingID={updatingID}
-                            deletingID={deletingID}
-                        />
+                        {diaryList.length > 0 
+                            ? (
+                                <DiaryList 
+                                    diaryList={diaryList}
+                                    handleDeleteDiary={deleteDiary}
+                                    handleUpadateDiary={upadateDiary}
+                                    updatingID={updatingID}
+                                    deletingID={deletingID}
+                                />
+                            ) 
+                            : (
+                                <p>保存された日記はありません</p>
+                            ) 
+                        }
                     </>
                 )
             }
