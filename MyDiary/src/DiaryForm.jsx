@@ -4,6 +4,7 @@ import { useState } from "react"
 const DiaryForm = ({ handleAddDiary, addLoading })=>{
   const [diary_title, setTitle] = useState("");
   const [diary_main, setMainDiary] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   
   const handleTitle = (event)=>{
@@ -13,10 +14,14 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
     setMainDiary(event.target.value);
   }
 
-  const handleSaveButton = ()=>{
+  const DiaryChekker = () => {
+    if(!diary_title && !diary_main){
+      setErrorMessage("タイトルか本文を書いてください");
+      return;
+    }
 
     handleAddDiary(diary_title, diary_main);
-  
+
     setTitle("");
     setMainDiary("");
   }
@@ -39,8 +44,10 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
         </label>
       </div>
 
+      {errorMessage && <p>{errorMessage}</p>}
+
       <button 
-        onClick={handleSaveButton}
+        onClick={DiaryChekker}
         disabled={addLoading}
       >
         {addLoading ? "保存中..." : "保存"}
