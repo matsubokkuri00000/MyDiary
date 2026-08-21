@@ -69,7 +69,7 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, up
 
                 <button 
                     onClick={handleDelete}
-                    disabled={deletingID === diary.id}
+                    disabled={deletingID !== null}
                 >
                     {deletingID === diary.id ? "削除中..." : "削除" }
                 </button>
