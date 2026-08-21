@@ -1,8 +1,11 @@
 import { useContext } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Auth from "./Auth";
 import AuthContext from "./AuthContext";
 import DiaryPage from "./DiaryPage";
-import { Route, Routes, Navigate } from "react-router-dom";
+import NotFound from "./NotFound";
+
+
 
 function App (){
   const { user, loading } = useContext(AuthContext);
@@ -38,6 +41,11 @@ function App (){
              ? <DiaryPage />
              : <Navigate to="/login" />
           }
+        />
+
+        <Route 
+          path="*"
+          element={<NotFound />}
         />
 
       </Routes>  
