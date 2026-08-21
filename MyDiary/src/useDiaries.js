@@ -7,10 +7,18 @@ const useDiaries = ()=>{
     const [fetchLoading, setFetchLoading] = useState(true);
     const [addLoading, setAddLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
+    const [deletingID, setDeletingId] = useState(null);
     const [updateLoading, setUpdateLoading] = useState(false);
     const { user } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+
+    const showSuccessMessage = (message) => {
+        setSuccessMessage(message);
+        setTimeout(() => {
+            setSuccessMessage("");
+        }, 3000);
+    }
 
     const fetchDiaries = async ()=>{
 
@@ -32,12 +40,6 @@ const useDiaries = ()=>{
             const reverseData = [...data].reverse()
 
             setDiaryList(reverseData);
-
-            setSuccessMessage("日記一覧が取得されました");
-
-            setTimeout(()=>{
-                setSuccessMessage("");
-            }, 3000)
             
         } catch (error) {
             console.log(error);
@@ -72,11 +74,7 @@ const useDiaries = ()=>{
 
             await fetchDiaries();
 
-            setSuccessMessage("日記を追加しました");
-
-            setTimeout(()=>{
-                setSuccessMessage("");
-            }, 3000)
+            showSuccessMessage("日記を追加しました");
 
         } catch (error) {
             console.log(error);
@@ -90,6 +88,7 @@ const useDiaries = ()=>{
     const deleteDiary = async (ID)=> {
 
         try {
+            setDeletingId(ID);
             setDeleteLoading(true);
             setErrorMessage("");
             setSuccessMessage("");
@@ -107,17 +106,13 @@ const useDiaries = ()=>{
 
             await fetchDiaries();
 
-            setSuccessMessage("日記を削除しました");
-    
-            setTimeout(()=>{
-                setSuccessMessage("");
-            }, 3000)
-            
+            showSuccessMessage("日記を削除しました"); 
             
         } catch (error) {
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
         } finally {
+            setDeletingId(null);
             setDeleteLoading(false);
         }
 
@@ -146,11 +141,7 @@ const useDiaries = ()=>{
 
             await fetchDiaries();
 
-            setSuccessMessage("日記を更新しました");
-
-            setTimeout(() => {
-                setSuccessMessage("");
-            }, 3000);
+            showSuccessMessage("日記を更新しました");
             
         } catch (error) {
             console.log(error);
@@ -174,6 +165,7 @@ const useDiaries = ()=>{
 
     return {
         diaryList,
+        deletingID,
         fetchLoading,
         addLoading,
         deleteLoading,

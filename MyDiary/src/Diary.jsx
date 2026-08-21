@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, updateLoading })=>{
+const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, updateLoading, deletingID })=>{
     const [isEditing, setEditing] = useState(false);
     const [updated, setUpdated] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
@@ -48,9 +48,13 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, up
                     onClick={handleSaveEditDiary}
                     disabled={updateLoading}
                 >
-                    {updateLoading ? "保存中..." : "保存"}
+                    {updateLoading ? "更新中..." : "保存"}
                 </button>
-                <button onClick={handleEditMode}>キャンセル</button>
+                <button 
+                    onClick={handleEditMode}
+                >
+                    キャンセル
+                </button>
             </>
         );
     }
@@ -63,7 +67,12 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, up
                 <p>タイトル：{diary.title}</p>
                 <p>本文：{diary.main_text}</p>
 
-                <button onClick={handleDelete}>削除</button>
+                <button 
+                    onClick={handleDelete}
+                    disabled={deletingID === diary.id}
+                >
+                    {deletingID === diary.id ? "削除中..." : "削除" }
+                </button>
                 <button onClick={handleEditMode}>編集</button>
                 <p>---------------------</p>
             </>
@@ -78,11 +87,16 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, up
 
             <button 
                 onClick={handleDelete}
-                disabled={deleteLoading}
+                disabled={deletingID === diary.id }
             >
-                {deleteLoading ? "削除中..." : "削除"}
+                {deletingID === diary.id ? "削除中..." : "削除"}
             </button>
-            <button onClick={handleEditMode}>編集</button>
+
+            <button 
+                onClick={handleEditMode}
+            >
+                編集
+            </button>
             <p>---------------------</p>
         </article>
     )
