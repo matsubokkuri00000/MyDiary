@@ -1,6 +1,6 @@
 import Diary from "./Diary";
 
-const DiaryList = ({ diaryList, handleDeleteDiary, handleUpadateDiary, updateLoading, deletingID })=>{
+const DiaryList = ({ diaryList, handleDeleteDiary, handleUpadateDiary, updateLoading, deletingID, updatingID })=>{
   const result = diaryList.map((diary)=>{
       return <Diary 
                 key={diary.id}
@@ -9,6 +9,7 @@ const DiaryList = ({ diaryList, handleDeleteDiary, handleUpadateDiary, updateLoa
                 handleUpadateDiary={handleUpadateDiary}
                 updateLoading={updateLoading}
                 deletingID={deletingID}
+                updatingID={updatingID}
               />
   });
 

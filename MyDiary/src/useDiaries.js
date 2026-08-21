@@ -8,6 +8,7 @@ const useDiaries = ()=>{
     const [addLoading, setAddLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [deletingID, setDeletingId] = useState(null);
+    const [updatingID, setupdatingID] = useState(null);
     const [updateLoading, setUpdateLoading] = useState(false);
     const { user } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
@@ -101,7 +102,7 @@ const useDiaries = ()=>{
             setSuccessMessage("");
 
             //テスト用
-            await sleep(3000);
+            await sleep(500);
 
             const { error } = await supabase
                 .from("diaries")
@@ -131,12 +132,14 @@ const useDiaries = ()=>{
     const upadateDiary = async (ID, newTitle, newDiary)=>{
 
         try {
+            setupdatingID(ID);
             setUpdateLoading(true);
             setErrorMessage("");
             setSuccessMessage("");
 
+
             //テスト用
-            await sleep(3000);
+            await sleep(500);
 
             const { error } = await supabase
                 .from("diaries")
@@ -149,17 +152,21 @@ const useDiaries = ()=>{
             if(error){
                 console.log(error);
                 setErrorMessage("日記の更新に失敗しました");
-                return;
+                return false;
             }
 
             await fetchDiaries();
 
             showSuccessMessage("日記を更新しました");
+
+            return true;
             
         } catch (error) {
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
+            return false;
         } finally {
+            setupdatingID(null);
             setUpdateLoading(false);
         }
     }
@@ -179,6 +186,7 @@ const useDiaries = ()=>{
     return {
         diaryList,
         deletingID,
+        updatingID,
         fetchLoading,
         addLoading,
         deleteLoading,
