@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, updateLoading, deletingID })=>{
+const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, updateLoading, deletingID })=>{
     const [isEditing, setEditing] = useState(false);
     const [updated, setUpdated] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
@@ -87,7 +87,7 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deleteLoading, up
 
             <button 
                 onClick={handleDelete}
-                disabled={deletingID === diary.id }
+                disabled={deletingID !== null }
             >
                 {deletingID === diary.id ? "削除中..." : "削除"}
             </button>

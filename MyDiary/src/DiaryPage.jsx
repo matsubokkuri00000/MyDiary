@@ -6,7 +6,7 @@ import DiaryList from "./DiaryList";
 import LoadingUI from "./LoadingUI";
 
 const DiaryPage = () => {
-    const {diaryList, deletingID, fetchLoading, addLoading, deleteLoading, updateLoading, errorMessage, successMessage, addDiary, deleteDiary, upadateDiary} = useDiaries();
+    const {diaryList, deletingID, fetchLoading, addLoading, updateLoading, errorMessage, successMessage, addDiary, deleteDiary, upadateDiary} = useDiaries();
     const { user, signOut } = useContext(AuthContext);
 
      return (
@@ -36,7 +36,6 @@ const DiaryPage = () => {
                             diaryList={diaryList}
                             handleDeleteDiary={deleteDiary}
                             handleUpadateDiary={upadateDiary}
-                            deleteLoading={deleteLoading}
                             updateLoading={updateLoading}
                             deletingID={deletingID}
                         />
