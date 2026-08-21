@@ -14,11 +14,15 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
     setMainDiary(event.target.value);
   }
 
-  const DiaryChekker = () => {
-    if(!diary_title && !diary_main){
+  const DiaryChekker = (event) => {
+    event.preventDefault();
+
+    if(!diary_title.trim() && !diary_main.trim()){
       setErrorMessage("タイトルか本文を書いてください");
       return;
     }
+
+    setErrorMessage("");
 
     handleAddDiary(diary_title, diary_main);
 
@@ -29,29 +33,37 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
   return (
     <>
       <p>------入力フォーム------</p>
-      
-      <div>
-        <label>
-          <p>タイトル：</p>
-          <input value={diary_title} onChange={handleTitle}/>
-        </label>
-      </div>
 
-      <div>
-        <label>
-          <p>本文：</p>
-          <textarea value={diary_main} onChange={handleMainDiary}/>
-        </label>
-      </div>
+      <form onSubmit={DiaryChekker}>
+        <div>
+          <label>
+            <p>タイトル：</p>
+            <input 
+              value={diary_title} 
+              onChange={handleTitle}
+            />
+          </label>
+        </div>
 
-      {errorMessage && <p>{errorMessage}</p>}
+        <div>
+          <label>
+            <p>本文：</p>
+            <textarea 
+              value={diary_main} 
+              onChange={handleMainDiary}
+            />
+          </label>
+        </div>
 
-      <button 
-        onClick={DiaryChekker}
-        disabled={addLoading}
-      >
-        {addLoading ? "保存中..." : "保存"}
-      </button>
+        {errorMessage && <p>{errorMessage}</p>}
+
+        <button 
+          type="submit"
+          disabled={addLoading}
+        >
+          {addLoading ? "保存中..." : "保存"}
+        </button>
+      </form>
     </>
   )
 }
