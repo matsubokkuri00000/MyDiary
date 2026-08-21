@@ -10,12 +10,14 @@ const useDiaries = ()=>{
     const [updateLoading, setUpdateLoading] = useState(false);
     const { user } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
 
     const fetchDiaries = async ()=>{
 
         try {
             setFetchLoading(true);
             setErrorMessage("");
+            setSuccessMessage("");
 
             const { data, error } = await supabase
                 .from("diaries")
@@ -30,6 +32,12 @@ const useDiaries = ()=>{
             const reverseData = [...data].reverse()
 
             setDiaryList(reverseData);
+
+            setSuccessMessage("日記一覧が取得されました");
+
+            setTimeout(()=>{
+                setSuccessMessage("");
+            }, 3000)
             
         } catch (error) {
             console.log(error);
@@ -44,6 +52,7 @@ const useDiaries = ()=>{
         try {
             setAddLoading(true);
             setErrorMessage("");
+            setSuccessMessage("");
 
             const { error } = await supabase
                 .from("diaries")
@@ -63,6 +72,12 @@ const useDiaries = ()=>{
 
             await fetchDiaries();
 
+            setSuccessMessage("日記を追加しました");
+
+            setTimeout(()=>{
+                setSuccessMessage("");
+            }, 3000)
+
         } catch (error) {
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
@@ -77,6 +92,7 @@ const useDiaries = ()=>{
         try {
             setDeleteLoading(true);
             setErrorMessage("");
+            setSuccessMessage("");
 
             const { error } = await supabase
                 .from("diaries")
@@ -90,6 +106,13 @@ const useDiaries = ()=>{
             }
 
             await fetchDiaries();
+
+            setSuccessMessage("日記を削除しました");
+    
+            setTimeout(()=>{
+                setSuccessMessage("");
+            }, 3000)
+            
             
         } catch (error) {
             console.log(error);
@@ -105,6 +128,7 @@ const useDiaries = ()=>{
         try {
             setUpdateLoading(true);
             setErrorMessage("");
+            setSuccessMessage("");
 
             const { error } = await supabase
                 .from("diaries")
@@ -121,6 +145,12 @@ const useDiaries = ()=>{
             }
 
             await fetchDiaries();
+
+            setSuccessMessage("日記を更新しました");
+
+            setTimeout(() => {
+                setSuccessMessage("");
+            }, 3000);
             
         } catch (error) {
             console.log(error);
@@ -149,6 +179,7 @@ const useDiaries = ()=>{
         deleteLoading,
         updateLoading,
         errorMessage,
+        successMessage,
         addDiary,
         deleteDiary,
         upadateDiary

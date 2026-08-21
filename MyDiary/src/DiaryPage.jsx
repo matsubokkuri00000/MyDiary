@@ -6,7 +6,7 @@ import DiaryList from "./DiaryList";
 import LoadingUI from "./LoadingUI";
 
 const DiaryPage = () => {
-    const {diaryList, fetchLoading, addLoading, deleteLoading, updateLoading, errorMessage, addDiary, deleteDiary, upadateDiary} = useDiaries();
+    const {diaryList, fetchLoading, addLoading, deleteLoading, updateLoading, errorMessage, successMessage, addDiary, deleteDiary, upadateDiary} = useDiaries();
     const { user, signOut } = useContext(AuthContext);
 
      return (
@@ -17,6 +17,7 @@ const DiaryPage = () => {
             <p>ログイン中のユーザ：{user?.email}</p>
 
             {errorMessage && <p>{errorMessage}</p>}
+            {successMessage && <p>{successMessage}</p>}
 
             <h1>Diary</h1>
             {fetchLoading
