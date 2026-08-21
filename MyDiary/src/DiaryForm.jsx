@@ -35,6 +35,7 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
       <p>------入力フォーム------</p>
 
       <form onSubmit={DiaryChekker}>
+        
         <div>
           <label>
             <p>タイトル：</p>
@@ -63,6 +64,7 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
         >
           {addLoading ? "保存中..." : "保存"}
         </button>
+
       </form>
     </>
   )
