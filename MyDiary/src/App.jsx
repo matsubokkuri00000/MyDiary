@@ -4,6 +4,7 @@ import Auth from "./Auth";
 import AuthContext from "./AuthContext";
 import DiaryPage from "./DiaryPage";
 import NotFound from "./NotFound";
+import Layout from "./Layout";
 
 
 
@@ -34,14 +35,16 @@ function App (){
           }
         />
 
-        <Route 
-          path="/diary" 
-          element={
-            user
-             ? <DiaryPage />
-             : <Navigate to="/login" />
-          }
-        />
+        <Route element={<Layout />}>
+          <Route 
+            path="/diary" 
+            element={
+              user
+              ? <DiaryPage />
+              : <Navigate to="/login" />
+            }
+          />
+        </Route>
 
         <Route 
           path="*"
