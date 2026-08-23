@@ -78,8 +78,8 @@ const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updati
             <>
                 <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
                 <p>更新日時：{new Date(diary.updated_at).toLocaleString("ja-JP")}</p>
-                <p>タイトル：{diary.title}</p>
-                <p>本文：{diary.main_text}</p>
+                <p><b>{diary.title}</b></p>
+                <p>{diary.main_text}</p>
 
                 <button 
                     onClick={handleDelete}
@@ -101,8 +101,8 @@ const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updati
     return (
         <article>
             <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
-            <p>タイトル：{diary.title}</p>
-            <p>本文：{diary.main_text}</p>
+            <p><b>{diary.title}</b></p>
+            <p>{diary.main_text}</p>
 
             <button 
                 onClick={handleDelete}
