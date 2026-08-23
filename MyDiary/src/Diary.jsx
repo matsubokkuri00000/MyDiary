@@ -18,7 +18,7 @@ const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updati
 
     const handleEditMode = ()=>{
 
-        setEditing(true);
+        setEditing(!isEditing);
     }
     
     const handleUpdateTitle = (event)=>{
