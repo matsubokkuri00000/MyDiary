@@ -1,24 +1,13 @@
-import { useContext } from "react";
-import AuthContext from "./AuthContext";
 import useDiaries from "./useDiaries";
 import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
 import LoadingUI from "./LoadingUI";
 
 const DiaryPage = () => {
-    const {diaryList, deletingID, updatingID, fetchLoading, addLoading, updateLoading, errorMessage, successMessage, addDiary, deleteDiary, upadateDiary} = useDiaries();
-    const { user, signOut } = useContext(AuthContext);
+    const {diaryList, deletingID, updatingID, fetchLoading, addLoading, addDiary, deleteDiary, upadateDiary} = useDiaries();
 
      return (
         <>
-            <button onClick={signOut}>
-                ログアウト
-            </button>
-            <p>ログイン中のユーザ：{user?.email}</p>
-
-            {errorMessage && <p>{errorMessage}</p>}
-            {successMessage && <p>{successMessage}</p>}
-
             <h1>Diary</h1>
             {fetchLoading
                 ? (
