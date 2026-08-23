@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deletingID, updatingID })=>{
+const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updatingID })=>{
     const [isEditing, setEditing] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
     const [new_diary_main, setNewMainDiary] = useState(diary.main_text);
@@ -30,7 +30,7 @@ const Diary = ({ diary, handleDeleteDiary, handleUpadateDiary, deletingID, updat
     }
 
     const handleSaveEditDiary = async ()=>{
-        const success = await handleUpadateDiary(
+        const success = await handleupdateDiary(
             diary.id, 
             new_diary_title, 
             new_diary_main

@@ -28,10 +28,13 @@ const useDiaries = ()=>{
         }, 3000);
     }
 
-    const fetchDiaries = async ()=>{
+    const fetchDiaries = async (shwowLoading = true)=>{
 
         try {
-            setFetchLoading(true);
+            if(shwowLoading){
+                setFetchLoading(true);
+            }
+
             setErrorMessage("");
             setSuccessMessage("");
 
@@ -80,7 +83,7 @@ const useDiaries = ()=>{
                 return
             }
 
-            await fetchDiaries();
+            await fetchDiaries(false);
 
             showSuccessMessage("日記を追加しました");
 
@@ -115,7 +118,7 @@ const useDiaries = ()=>{
                 return;
             }
 
-            await fetchDiaries();
+            await fetchDiaries(false);
 
             showSuccessMessage("日記を削除しました"); 
             
@@ -129,7 +132,7 @@ const useDiaries = ()=>{
 
     }
 
-    const upadateDiary = async (ID, newTitle, newDiary)=>{
+    const updateDiary = async (ID, newTitle, newDiary)=>{
 
         try {
             setupdatingID(ID);
@@ -155,7 +158,7 @@ const useDiaries = ()=>{
                 return false;
             }
 
-            await fetchDiaries();
+            await fetchDiaries(false);
 
             showSuccessMessage("日記を更新しました");
 
@@ -178,7 +181,7 @@ const useDiaries = ()=>{
             return;
         }
 
-        fetchDiaries();
+        fetchDiaries(true);
 
     },[user]);
 
@@ -195,7 +198,7 @@ const useDiaries = ()=>{
         successMessage,
         addDiary,
         deleteDiary,
-        upadateDiary
+        updateDiary
     };
 }
 

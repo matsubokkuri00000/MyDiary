@@ -4,11 +4,10 @@ import DiaryList from "./DiaryList";
 import LoadingUI from "./LoadingUI";
 
 const DiaryPage = () => {
-    const {diaryList, deletingID, updatingID, fetchLoading, addLoading, addDiary, deleteDiary, upadateDiary} = useDiaries();
+    const {diaryList, deletingID, updatingID, fetchLoading, addLoading, addDiary, deleteDiary, updateDiary} = useDiaries();
 
      return (
         <>
-            <h1>Diary</h1>
             {fetchLoading
                 ? (
                     <LoadingUI />
@@ -26,7 +25,7 @@ const DiaryPage = () => {
                                 <DiaryList 
                                     diaryList={diaryList}
                                     handleDeleteDiary={deleteDiary}
-                                    handleUpadateDiary={upadateDiary}
+                                    handleupdateDiary={updateDiary}
                                     updatingID={updatingID}
                                     deletingID={deletingID}
                                 />
