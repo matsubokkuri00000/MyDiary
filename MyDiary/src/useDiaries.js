@@ -40,7 +40,8 @@ const useDiaries = ()=>{
 
             const { data, error } = await supabase
                 .from("diaries")
-                .select("*");
+                .select("*")
+                .order("created_at", {ascending: false});
             
             if(error){
                 console.log(error);
@@ -48,9 +49,9 @@ const useDiaries = ()=>{
                 return;
             }
 
-            const reverseData = [...data].reverse()
+            //const reverseData = [...data].reverse()
 
-            setDiaryList(reverseData);
+            setDiaryList(data);
             
         } catch (error) {
             console.log(error);

@@ -29,6 +29,12 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
     setMainDiary("");
   }
 
+  const handleTitleKeyDown = (event) => {
+    if(event.key === "Enter"){
+      event.preventDefault();
+    }
+  }
+
   return (
     <>
       <p>------入力フォーム------</p>
@@ -41,6 +47,7 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
             <input 
               value={diary_title} 
               onChange={handleTitle}
+              onKeyDown={handleTitleKeyDown}
             />
           </label>
         </div>
