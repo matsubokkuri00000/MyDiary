@@ -1,15 +1,14 @@
+const CACHE_NAME = "my-diary-cache-v1";
+
 console.log("Service Workerが読み込まれました");
 
 self.addEventListener("install", (event) => {
-
-    console.log("Service Worker：install");
-
     event.waitUntil(
-        caches.open("my-diary-cache")
+        caches.open(CACHE_NAME)
             .then((cache) => {
                 console.log("キャッシュを開きました", cache);
 
-                //URLのデータを取得して，このキャッシュに保存して
+                //URLのデータを取得して，このキャッシュに保存
                 return cache.addAll([
                     "/",
                     "/manifest.webmanifest",
@@ -21,10 +20,19 @@ self.addEventListener("install", (event) => {
 
 });
 
-self.addEventListener("activate", () => {
-
-    console.log("Service Worker：activate");
-
+self.addEventListener("activate", (event) => {
+    event.waitUntil(
+        caches.keys()
+            .then((cacheNames) => {
+                return Promise.all(
+                    cacheNames.map((cacheName) => {
+                        if(cacheName !== CACHE_NAME){
+                            return caches.delete(cacheName);
+                        }
+                    })
+                )
+            })
+    )
 });
 
 
