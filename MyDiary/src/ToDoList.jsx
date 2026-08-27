@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid"
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
     const [todoList, setTodoList] = useState([]);
-    const [is_Completed, setIsCompleted] = useState(false);
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
@@ -19,7 +18,7 @@ const ToDoList = () => {
         const newTodoList = [...todoList, {
             id: uuidv4(),
             todoTitle: todoTitle,
-            is_Completed: is_Completed
+            is_Completed: false
         }];
 
         setTodoList(newTodoList);
