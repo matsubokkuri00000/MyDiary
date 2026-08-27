@@ -48,11 +48,11 @@ function App (){
         </Route>
 
         <Route 
-          path="/ToDoList"
+          path="/todolist"
           element={
             user
               ? <ToDoList />
-              : <Navigate to="login"/>
+              : <Navigate to="/login"/>
           }
         />
 
