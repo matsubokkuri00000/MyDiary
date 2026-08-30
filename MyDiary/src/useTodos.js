@@ -1,24 +1,33 @@
 import { supabase } from "./supabase";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import AuthContext from "./AuthContext";
 
 const useTodos = () => {
-    const [tasks, settasks] = useState([]);
+    const [tasks, setTasks] = useState([]);
     const [fetchLoading, setFetchLoading] = useState(true);
     const [addLoading, setAddLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
-    const [deletingID, setDeletingId] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [updateID, setUpdateID] = useState(null);
+    const [updateLoading, setUpdateLoading] = useState(false);
+    const {user} = useContext(AuthContext);
     
+    const showSuccessMessage = (message) => {
+        setSuccessMessage(message);
+        setTimeout(() => {
+            setSuccessMessage("");
+        }, 3000);
+    }
 
-
-    const fetchTodo = async (shwowLoading = true) => {
+    const fetchTodo = async (showLoading = true) => {
         try {
-            if(shwowLoading){
+            if(showLoading){
                 setFetchLoading(true);
             }
 
             setErrorMessage("");
+            setSuccessMessage("");
 
             const { data, error } = await supabase
                 .from("todos")
@@ -33,9 +42,7 @@ const useTodos = () => {
                     console.log(data);
                 }
 
-                settasks(data);
-
-                successMessage("todoリストを取得しました");
+                setTasks(data);
 
         } catch (error) {
             console.log(error);
@@ -48,6 +55,8 @@ const useTodos = () => {
     const addTodo = async (todoTitle) => {
         try {
             setAddLoading(true);
+            setErrorMessage("");
+            setSuccessMessage("");
 
             const { error } = await supabase
                 .from("todos")
@@ -65,7 +74,7 @@ const useTodos = () => {
 
             await fetchTodo(false)
 
-            successMessage("タスクを追加しました");
+            showSuccessMessage("タスクを追加しました");
 
         } catch (error) {
             console.log(error);
@@ -79,6 +88,8 @@ const useTodos = () => {
         
         try {
             setDeleteLoading(true);
+            setErrorMessage("");
+            setSuccessMessage("");
 
             const { error } = await supabase   
                 .from("todos")
@@ -93,31 +104,76 @@ const useTodos = () => {
             
             await fetchTodo(false);
 
-            successMessage("タスクを削除しました");
+            showSuccessMessage("タスクを削除しました");
 
         } catch (error) {
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setDeletingId(null);
             setDeleteLoading(false);
+        }
+    }
+
+    const toggleTodo = async (ID, is_completed) => {
+
+        try {
+            setUpdateID(ID);
+            setUpdateLoading(true);
+            setErrorMessage("");
+            setSuccessMessage("");
+
+            const { error } = await supabase
+                .from("todos")
+                .update({
+                    is_completed: !is_completed
+                })
+                .eq("id", ID)
+
+            if(error){
+                console.log(error);
+                setErrorMessage("チェックをつけれませんでした");
+                return ;
+            }
+            
+            await fetchTodo(false);
+
+
+            return true;
+
+        } catch (error) {
+            console.log(error);
+            setErrorMessage("予期しないエラーが発生しました");
+            return false;
+        } finally {
+            setUpdateID(null);
+            setUpdateLoading(false);
         }
     }
 
 
     useEffect(()=>{
+
+        if(!user){
+            setTasks([]);
+            return ;
+        }
+
         fetchTodo(true);
-    },[])
+    },[user])
 
     return {
         tasks,
-        addLoading,
         fetchLoading,
+        addLoading,
         deleteLoading,
+        updateLoading,
+        updateID,
+        successMessage,
         errorMessage,
         fetchTodo,
         addTodo,
-        deleteTodo
+        deleteTodo,
+        toggleTodo
     };
 }
 

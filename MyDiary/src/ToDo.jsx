@@ -5,7 +5,8 @@ const ToDo = ({ todo, handleToggle }) => {
                 <label>
                     <input 
                         type="checkbox"
-                        onClick={() =>{handleToggle(todo.id)}}
+                        checked={todo.is_completed}
+                        onClick={() =>{handleToggle(todo.id, todo.is_completed)}}
                     />
                     {todo.task}
                 </label>

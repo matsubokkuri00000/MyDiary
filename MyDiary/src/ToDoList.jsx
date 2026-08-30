@@ -6,7 +6,7 @@ import useTodos from "./useTodos";
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
     const [todoList, setTodoList] = useState([]);
-    const { tasks, addTodo, deleteTodo } = useTodos();
+    const { tasks, addTodo, deleteTodo, toggleTodo, successMessage } = useTodos();
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
@@ -19,42 +19,19 @@ const ToDoList = () => {
 
         addTodo(todoTitle);
 
-        /*
-        const newTodoList = [...todoList, {
-            id: uuidv4(),
-            task: todoTitle,
-            is_completed: false
-        }];
-
-        setTodoList(newTodoList);
-        */
-
         setTodoTitle("");
     }
 
-    const handleToggle = (ID) => {
-        const currentTodoList = todoList;
+    const handleToggle = (ID, is_completed) => {
 
-        const result = currentTodoList.map((todo)=>{
-            if(todo.id === ID){
-                return  (
-                    {
-                        ...todo,
-                        is_completed: !todo.is_completed
-                    }
-                )
-            }
-
-            return todo;
-        })
-
-        setTodoList(result);
+        toggleTodo(ID, is_completed);
     }
 
     const handleDelete = () => {
 
         deleteTodo();
 
+        /*
         const result = todoList.filter((todo)=>{
             if(todo.is_completed){
                 return ;
@@ -64,15 +41,17 @@ const ToDoList = () => {
         })
 
         return setTodoList(result);
+        */
     }
 
     return (
         <>
-            <p>ToDoリスト</p>
-            <ToDos 
-                todoList={tasks}
-                handleToggle={handleToggle}
-            />
+            <div>
+                <h1>ToDoリスト</h1>
+                <p style={{ minHeight: "1.5em" }}>
+                    {successMessage}
+                </p>
+            </div>
 
             <input 
                 value={todoTitle}
@@ -90,6 +69,12 @@ const ToDoList = () => {
             >
                 完了済みのタスクを削除
             </button>
+
+            <p>---------------------------------------------</p>
+            <ToDos 
+                todoList={tasks}
+                handleToggle={handleToggle}
+            />
 
         </>
     )
