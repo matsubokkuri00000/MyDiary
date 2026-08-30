@@ -7,7 +7,7 @@ const ToDo = ({ todo, handleToggle }) => {
                         type="checkbox"
                         onClick={() =>{handleToggle(todo.id)}}
                     />
-                    {todo.todoTitle}
+                    {todo.task}
                 </label>
 
             </div>
