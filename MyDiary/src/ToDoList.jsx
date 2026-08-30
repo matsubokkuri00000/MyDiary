@@ -6,7 +6,6 @@ import useTodos from "./useTodos";
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
     const [todoList, setTodoList] = useState([]);
-
     const { addTodo } = useTodos();
 
     const handleTitle = (event) => {
