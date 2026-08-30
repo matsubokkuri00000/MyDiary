@@ -6,7 +6,7 @@ import useTodos from "./useTodos";
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
     const [todoList, setTodoList] = useState([]);
-    const { addTodo } = useTodos();
+    const { tasks, addTodo, deleteTodo } = useTodos();
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
@@ -19,6 +19,7 @@ const ToDoList = () => {
 
         addTodo(todoTitle);
 
+        /*
         const newTodoList = [...todoList, {
             id: uuidv4(),
             task: todoTitle,
@@ -26,6 +27,7 @@ const ToDoList = () => {
         }];
 
         setTodoList(newTodoList);
+        */
 
         setTodoTitle("");
     }
@@ -51,6 +53,8 @@ const ToDoList = () => {
 
     const handleDelete = () => {
 
+        deleteTodo();
+
         const result = todoList.filter((todo)=>{
             if(todo.is_completed){
                 return ;
@@ -66,7 +70,7 @@ const ToDoList = () => {
         <>
             <p>ToDoリスト</p>
             <ToDos 
-                todoList={todoList}
+                todoList={tasks}
                 handleToggle={handleToggle}
             />
 
