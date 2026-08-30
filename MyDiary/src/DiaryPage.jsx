@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useDiaries from "./useDiaries";
 import DiaryForm from "./DiaryForm";
 import DiaryList from "./DiaryList";
@@ -18,6 +19,10 @@ const DiaryPage = () => {
                             handleAddDiary={addDiary}
                             addLoading={addLoading}
                         />
+
+                        <Link to="/todolist">
+                            ToDoリスト
+                        </Link>
 
                         <p>----一覧表示-----</p>
                         {diaryList.length > 0 

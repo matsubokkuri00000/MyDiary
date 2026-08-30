@@ -5,6 +5,7 @@ import AuthContext from "./AuthContext";
 import DiaryPage from "./DiaryPage";
 import NotFound from "./NotFound";
 import Layout from "./Layout";
+import ToDoList from "./ToDoList";
 
 
 
@@ -40,16 +41,26 @@ function App (){
             path="/diary" 
             element={
               user
-              ? <DiaryPage />
-              : <Navigate to="/login" />
+                ? <DiaryPage />
+                : <Navigate to="/login" />
             }
           />
         </Route>
 
         <Route 
+          path="/todolist"
+          element={
+            user
+              ? <ToDoList />
+              : <Navigate to="/login"/>
+          }
+        />
+
+        <Route 
           path="*"
           element={<NotFound />}
         />
+
 
       </Routes>  
   )
