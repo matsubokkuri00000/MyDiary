@@ -1,11 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ToDos from "./ToDos";
-import { v4 as uuidv4 } from "uuid"
 import useTodos from "./useTodos";
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
-    const [todoList, setTodoList] = useState([]);
     const { tasks, addTodo, deleteTodo, toggleTodo, successMessage } = useTodos();
 
     const handleTitle = (event) => {
@@ -23,29 +22,21 @@ const ToDoList = () => {
     }
 
     const handleToggle = (ID, is_completed) => {
-
         toggleTodo(ID, is_completed);
     }
 
     const handleDelete = () => {
-
         deleteTodo();
-
-        /*
-        const result = todoList.filter((todo)=>{
-            if(todo.is_completed){
-                return ;
-            }
-
-            return todo;
-        })
-
-        return setTodoList(result);
-        */
     }
 
     return (
         <>
+            <Link 
+                to="/"
+            >
+                戻る
+            </Link>
+
             <div>
                 <h1>ToDoリスト</h1>
                 <p style={{ minHeight: "1.5em" }}>
