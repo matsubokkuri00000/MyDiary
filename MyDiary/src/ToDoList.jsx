@@ -5,7 +5,7 @@ import useTodos from "./useTodos";
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
-    const { tasks, addTodo, deleteTodo, toggleTodo, successMessage } = useTodos();
+    const { tasks, loading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
@@ -39,7 +39,11 @@ const ToDoList = () => {
 
             <div>
                 <h1>ToDoリスト</h1>
-                <p style={{ minHeight: "1.5em" }}>
+                <p 
+                    style={
+                        { minHeight: "1.5em" }
+                    }
+                >
                     {successMessage}
                 </p>
             </div>
@@ -51,12 +55,14 @@ const ToDoList = () => {
 
             <button
                 onClick={handleAddTodo}
+                disabled={loading}
             >
                 追加
             </button>
 
             <button
                 onClick={handleDelete}
+                disabled={loading}
             >
                 完了済みのタスクを削除
             </button>

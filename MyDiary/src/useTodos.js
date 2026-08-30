@@ -4,13 +4,14 @@ import AuthContext from "./AuthContext";
 
 const useTodos = () => {
     const [tasks, setTasks] = useState([]);
+    const [loading ,setLoading] = useState(false);
     const [fetchLoading, setFetchLoading] = useState(true);
-    const [addLoading, setAddLoading] = useState(false);
-    const [deleteLoading, setDeleteLoading] = useState(false);
+    //const [addLoading, setAddLoading] = useState(false);
+    //const [deleteLoading, setDeleteLoading] = useState(false);
+    //const [updateLoading, setUpdateLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [updateID, setUpdateID] = useState(null);
-    const [updateLoading, setUpdateLoading] = useState(false);
     const {user} = useContext(AuthContext);
     
     const showSuccessMessage = (message) => {
@@ -52,7 +53,7 @@ const useTodos = () => {
 
     const addTodo = async (todoTitle) => {
         try {
-            setAddLoading(true);
+            setLoading(true);
             setErrorMessage("");
             setSuccessMessage("");
 
@@ -78,14 +79,14 @@ const useTodos = () => {
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setAddLoading(false);
+            setLoading(false);
         }
     }
 
     const deleteTodo = async () => {
         
         try {
-            setDeleteLoading(true);
+            setLoading(true);
             setErrorMessage("");
             setSuccessMessage("");
 
@@ -108,7 +109,7 @@ const useTodos = () => {
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setDeleteLoading(false);
+            setLoading(false);
         }
     }
 
@@ -116,7 +117,7 @@ const useTodos = () => {
 
         try {
             setUpdateID(ID);
-            setUpdateLoading(true);
+            setLoading(true);
             setErrorMessage("");
             setSuccessMessage("");
 
@@ -144,7 +145,7 @@ const useTodos = () => {
             return false;
         } finally {
             setUpdateID(null);
-            setUpdateLoading(false);
+            setLoading(false);
         }
     }
 
@@ -161,10 +162,7 @@ const useTodos = () => {
 
     return {
         tasks,
-        fetchLoading,
-        addLoading,
-        deleteLoading,
-        updateLoading,
+        loading,
         updateID,
         successMessage,
         errorMessage,
