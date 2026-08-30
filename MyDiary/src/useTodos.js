@@ -38,8 +38,6 @@ const useTodos = () => {
                     console.log(error);
                     setErrorMessage("todoリストを取得できませんでした");
                     return ;
-                } else {
-                    console.log(data);
                 }
 
                 setTasks(data);
