@@ -37,41 +37,43 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
 
   return (
     <>
-      <p>------入力フォーム------</p>
+      <div className="diary-form">
+        <p>------入力フォーム------</p>
 
-      <form onSubmit={DiaryChekker}>
-        
-        <div>
-          <label>
-            <p>タイトル：</p>
-            <input 
-              value={diary_title} 
-              onChange={handleTitle}
-              onKeyDown={handleTitleKeyDown}
-            />
-          </label>
-        </div>
+        <form onSubmit={DiaryChekker}>
+          
+          <div>
+            <label>
+              <p>タイトル：</p>
+              <input 
+                value={diary_title} 
+                onChange={handleTitle}
+                onKeyDown={handleTitleKeyDown}
+              />
+            </label>
+          </div>
 
-        <div>
-          <label>
-            <p>本文：</p>
-            <textarea 
-              value={diary_main} 
-              onChange={handleMainDiary}
-            />
-          </label>
-        </div>
+          <div>
+            <label>
+              <p>本文：</p>
+              <textarea 
+                value={diary_main} 
+                onChange={handleMainDiary}
+              />
+            </label>
+          </div>
 
-        {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && <p>{errorMessage}</p>}
 
-        <button 
-          type="submit"
-          disabled={addLoading}
-        >
-          {addLoading ? "保存中..." : "保存"}
-        </button>
+          <button 
+            type="submit"
+            disabled={addLoading}
+          >
+            {addLoading ? "保存中..." : "保存"}
+          </button>
 
-      </form>
+        </form>
+      </div>
     </>
   )
 }

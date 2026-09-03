@@ -1,0 +1,21 @@
+body {
+    margin: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: greenyellow ;
+}
+
+.app-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 16px;
+    background-color: white;
+}
+
+.diary-form {
+    border: 10px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 255);
+    padding: 10px;
+    margin: 20px 0;
+    
+}

@@ -7,21 +7,23 @@ const Layout = () => {
 
     return (
         <>
-            <header>
-                <h1>MyDiary</h1>
-                <button onClick={signOut}>
-                    ログアウト
-                </button>
-                <p>ログイン中のユーザ：{user?.email}</p>
+            <div className="app-container">
+                <header>
+                    <h1>MyDiary</h1>
+                    <button onClick={signOut}>
+                        ログアウト
+                    </button>
+                    <p>ログイン中のユーザ：{user?.email}</p>
 
-                {errorMessage && <p>{errorMessage}</p>}
-                {successMessage && <p>{successMessage}</p>}
+                    {errorMessage && <p>{errorMessage}</p>}
+                    {successMessage && <p>{successMessage}</p>}
 
-            </header>
+                </header>
 
-            <main>
-                <Outlet />
-            </main>
+                <main>
+                    <Outlet />
+                </main>
+            </div>
         </>
     )
 }
