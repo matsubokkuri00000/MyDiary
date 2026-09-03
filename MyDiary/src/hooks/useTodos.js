@@ -1,6 +1,6 @@
-import { supabase } from "./supabase";
+import { supabase } from "../services/supabase";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "./AuthContext";
+import AuthContext from "../contexts/AuthContext";
 
 const useTodos = () => {
     const [tasks, setTasks] = useState([]);

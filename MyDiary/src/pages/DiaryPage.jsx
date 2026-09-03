@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import useDiaries from "./useDiaries";
-import DiaryForm from "./DiaryForm";
-import DiaryList from "./DiaryList";
-import LoadingUI from "./LoadingUI";
+import useDiaries from "../hooks/useDiaries";
+import DiaryForm from "../components/diary/DiaryForm";
+import DiaryList from "../components/diary/DiaryList";
 
 const DiaryPage = () => {
     const {diaryList, deletingID, updatingID, fetchLoading, addLoading, addDiary, deleteDiary, updateDiary} = useDiaries();
@@ -11,7 +10,7 @@ const DiaryPage = () => {
         <>
             {fetchLoading
                 ? (
-                    <LoadingUI />
+                    <p>Now Loading...</p>
                 )
                 : (
                     <>

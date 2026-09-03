@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { supabase } from "./supabase";
-import AuthContext from "./AuthContext";
+import { supabase } from "../services/supabase";
+import AuthContext from "../contexts/AuthContext";
 
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);

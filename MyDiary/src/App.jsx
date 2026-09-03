@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import Auth from "./Auth";
-import AuthContext from "./AuthContext";
-import DiaryPage from "./DiaryPage";
-import NotFound from "./NotFound";
-import Layout from "./Layout";
-import ToDoList from "./ToDoList";
+import Auth from "./pages/Auth";
+import AuthContext from "./contexts/AuthContext";
+import DiaryPage from "./pages/DiaryPage";
+import NotFound from "./pages/NotFound";
+import Layout from "./layouts/Layout";
+import ToDoList from "./pages/ToDoList";
 
 
 

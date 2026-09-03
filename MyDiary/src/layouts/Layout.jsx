@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import AuthContext from "./AuthContext";
+import AuthContext from "../contexts/AuthContext";
 import { useContext } from "react";
 
 const Layout = () => {

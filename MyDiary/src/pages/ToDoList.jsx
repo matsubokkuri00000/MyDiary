@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import ToDos from "./ToDos";
-import useTodos from "./useTodos";
+import ToDos from "../components/todo/ToDos";
+import useTodos from "../hooks/useTodos";
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
