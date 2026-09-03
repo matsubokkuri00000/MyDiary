@@ -1,7 +1,20 @@
+:root {
+    --color-bg: #0b1120;
+    --color-surface: #1a2f5b;
+
+    --color-gold: #d4af37;
+    --color-gold-light: #f2d675;
+
+    --color-text: #f8fafc;
+    --color-text-muted: #94a3b8;
+
+    --color-border: #d4af37;
+}
+
 body {
     margin: 20px;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: greenyellow ;
+    background-color: var(--color-bg) ;
 }
 
 .app-container {
@@ -11,11 +24,3 @@ body {
     background-color: white;
 }
 
-.diary-form {
-    border: 10px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 255);
-    padding: 10px;
-    margin: 20px 0;
-    
-}

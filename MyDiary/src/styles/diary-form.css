@@ -1,0 +1,56 @@
+.diary-form {
+    border: 10px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 1);
+    padding: 20px;
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.diary-form form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.diary-form p{
+    margin: 0;
+}
+
+.diary-form input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.diary-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 60px;
+}
+
+.diary-form input:focus,
+.diary-form textarea:focus {
+    border-color: var(--color-gold);
+}
+
+.diary-form button{
+    width: 100%;
+    border: 1px solid var(--color-gold);
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+
+    transition: background-color 1.0s;
+}
+
+.diary-form button:hover{
+    background-color: var(--color-surface);
+    color: var(--color-text);
+}
+
+.diary-form button:disabled{
+    cursor: not-allowed;
+    opacity: 0.5;
+}

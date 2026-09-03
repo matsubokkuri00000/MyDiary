@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import { AuthProvider } from './contexts/AuthContext.jsx'
 import "./styles/global.css";
+import "./styles/diary-form.css";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
