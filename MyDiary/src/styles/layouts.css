@@ -8,6 +8,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    gap: 16px;
 }
 
 .app-header h1,
@@ -21,16 +23,27 @@
     gap: 16px;
 }
 
+.header-right p,
+.header-right button{
+    white-space: nowrap;
+}
+
 .app-body {
     display: flex;
     min-height: calc(100vh - 64px);
 }
 
-.sidebar {
+.sidebar{
     width: 220px;
     flex-shrink: 0;
+
+    border-right: 1px solid #ccc;
+    padding: 16px;
+    box-sizing: border-box;
 }
 
 .main-content {
     flex: 1;
+    padding: 24px;
+    box-sizing: border-box;
 }
