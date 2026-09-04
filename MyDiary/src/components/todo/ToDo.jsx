@@ -1,18 +1,20 @@
 const ToDo = ({ todo, handleToggle }) => {
     return (
-        <>
-            <div>  
-                <label>
-                    <input 
-                        type="checkbox"
-                        checked={todo.is_completed}
-                        onClick={() =>{handleToggle(todo.id, todo.is_completed)}}
-                    />
-                    {todo.task}
-                </label>
+        <div className="todo-item">   
+            <label className="todo-item-label">
+                <input 
+                    type="checkbox"
+                    checked={todo.is_completed}
+                    onChange={() =>{
+                        handleToggle(todo.id, todo.is_completed)
+                    }}
+                />
 
-            </div>
-        </>
+                <span className="todo-item-text">
+                    {todo.task}
+                </span>
+            </label>
+        </div>
     )
 }
 

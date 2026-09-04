@@ -1,13 +1,18 @@
 .diary-form-section {
-    border: 1px solid;
+    border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 24px;
+
+    background-color: var(--color-surface);
+
+    margin-bottom: 40px;
 }
 
 .diary-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    
 }
 
 .diary-form input,
@@ -17,21 +22,39 @@
 
     padding: 12px 14px;
 
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-border);
     border-radius: 8px;
 
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+
     font-size: 16px;
+}
+
+.diary-form input:focus,
+.diary-form textarea:focus {
+    border-color: var(--color-gold);
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-gold);
 }
 
 .diary-submit-button {
     align-self: flex-end;
     padding: 10px 24px;
 
-    border: 1px solid #CCC;
     border-radius: 8px;
 
-    background-color: white;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+
+    transition: 0.2s;
+
     cursor: pointer;
+}
+
+.diary-submit-button:hover {
+    border-color: var(--color-gold);
 }
 
 .diary-submit-button:disabled {
@@ -60,9 +83,9 @@
 }
 
 .diary-form-header p {
-    margin: 0px 0 0;
+    margin: 0;
     font-size: 14px;
-    color: #666;
+    color: var(--color-text-muted);
 }
 
 .form-error {
@@ -70,4 +93,3 @@
     font-size: 14px;
     color: #c0392b;
 }
-

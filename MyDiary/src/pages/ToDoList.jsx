@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import ToDos from "../components/todo/ToDos";
 import useTodos from "../hooks/useTodos";
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
-    const { tasks, loading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
+    const { tasks, loading, addTodo, deleteTodo, toggleTodo, successMessage } = useTodos();
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
@@ -30,44 +29,46 @@ const ToDoList = () => {
     }
 
     return (
-        <>
-            <div>
+        <section className="todo-page">
+            <div className="todo-header">
                 <h1>ToDoリスト</h1>
-                <p 
-                    style={
-                        { minHeight: "1.5em" }
-                    }
-                >
+
+                <p className="todo-message">
                     {successMessage}
                 </p>
             </div>
 
-            <input 
-                value={todoTitle}
-                onChange={handleTitle}
-            />
+            <div className="todo-form">
+                <input
+                    className="todo-input"
+                    value={todoTitle}
+                    onChange={handleTitle}
+                />
 
-            <button
-                onClick={handleAddTodo}
-                disabled={loading}
-            >
-                追加
-            </button>
+                <button
+                    className="todo-add-button"
+                    onClick={handleAddTodo}
+                    disabled={loading}
+                >
+                    追加
+                </button>
+            </div>
 
-            <button
-                onClick={handleDelete}
-                disabled={loading}
-            >
-                完了済みのタスクを削除
-            </button>
+            <div className="todo-actions">
+                <button
+                    className="todo-delete-completed-button"
+                    onClick={handleDelete}
+                    disabled={loading}
+                >
+                    完了済みのタスクを削除
+                </button>
+            </div>
 
-            <p>---------------------------------------------</p>
             <ToDos 
                 todoList={tasks}
                 handleToggle={handleToggle}
             />
-
-        </>
+        </section>
     )
 }
 

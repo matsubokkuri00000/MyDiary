@@ -17,8 +17,7 @@ const DiaryPage = () => {
                             handleAddDiary={addDiary}
                             addLoading={addLoading}
                         />
-
-                        <p>----一覧表示-----</p>
+                        
                         {diaryList.length > 0 
                             ? (
                                 <DiaryList 
