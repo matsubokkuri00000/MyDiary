@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../../styles/diary-card.css";
 
 const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updatingID })=>{
     const [isEditing, setEditing] = useState(false);
@@ -44,44 +45,81 @@ const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updati
 
     if(isEditing){
         return (
-            <>
-                <p>編集中・・・</p>
+            <article className="diary-card">
+                <p className="diary-editing-label">
+                    編集中・・・
+                </p>
 
-                <div>
-                    <label>
-                        <p>タイトル：</p>
-                        <input value={new_diary_title} onChange={handleUpdateTitle}></input></label>
-                    <label>
-                        <p>本文</p>
-                        <textarea value={new_diary_main} onChange={handleUpdateMainDiary}></textarea>
-                    </label>
+                <div className="diary-edit-form">
+                    <div className="diary-edit-group">
+                        <label htmlFor={`edit-title-${diary.id}`}>
+                            タイトル
+                        </label>
+
+                        <input
+                            id={`edit-title-${diary.id}`}
+                            value={new_diary_title}
+                            onChange={handleUpdateTitle}
+                        />
+                    </div>
+
+                    <div className="diary-edit-group">
+                        <label htmlFor={`edit-main-${diary.id}`}>
+                            本文
+                        </label>
+
+                        <textarea
+                            id={`edit-main-${diary.id}`}
+                            value={new_diary_main}
+                            onChange={handleUpdateMainDiary}
+                        />
+                    </div>
                 </div>
 
-                <button 
-                    onClick={handleSaveEditDiary}
-                    disabled={updatingID !== null}
+                <div className="diary-card-actions">
+                    <button
+                        className="diary-save-button"
+                        onClick={handleSaveEditDiary}
+                        disabled={updatingID !== null}
+                    >
+                        {updatingID === diary.id ? "更新中..." : "保存"}
+                    </button>
 
-                >
-                    {updatingID === diary.id ? "更新中..." : "保存"}
-                </button>
-                <button 
-                    onClick={handleEditMode}
-                >
-                    キャンセル
-                </button>
-            </>
+                    <button 
+                        className="diary-cancel-button"
+                        onClick={handleEditMode}
+                    >
+                        キャンセル
+                    </button>
+                </div>
+            </article>
         );
     }
 
-    if(diary.created_at != diary.updated_at){
-        return(
-            <>
+    return(
+        <article className="diary-card">
+            <div className="diary-card-meta">
                 <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
-                <p>更新日時：{new Date(diary.updated_at).toLocaleString("ja-JP")}</p>
-                <p><b>{diary.title}</b></p>
-                <p>{diary.main_text}</p>
 
+                {diary.created_at != diary.updated_at && (
+                    <p>更新日時：{new Date(diary.updated_at).toLocaleString("ja-JP")}</p>
+                )}
+
+            </div>
+            
+            <h3 className="diary-card-title">
+                {diary.title}
+            </h3>
+
+
+            <p className="diary-card-body">
+                {diary.main_text}
+            </p>
+
+            
+            <div className="diary-card-actions">
                 <button 
+                className="diary-delete-button"
                     onClick={handleDelete}
                     disabled={deletingID !== null}
                 >
@@ -89,34 +127,12 @@ const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updati
                 </button>
 
                 <button 
+                    className="diary-edit-button"
                     onClick={handleEditMode}
                 >
                     編集
                 </button>
-                <p>---------------------</p>
-            </>
-        )
-    }
-
-    return (
-        <article>
-            <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
-            <p><b>{diary.title}</b></p>
-            <p>{diary.main_text}</p>
-
-            <button 
-                onClick={handleDelete}
-                disabled={deletingID !== null }
-            >
-                {deletingID === diary.id ? "削除中..." : "削除"}
-            </button>
-
-            <button 
-                onClick={handleEditMode}
-            >
-                編集
-            </button>
-            <p>---------------------</p>
+            </div>
         </article>
     )
 }

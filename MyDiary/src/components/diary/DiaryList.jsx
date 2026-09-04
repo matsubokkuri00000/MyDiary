@@ -1,4 +1,5 @@
 import Diary from "./Diary";
+import "../../styles/diary-list.css"
 
 const DiaryList = ({ diaryList, handleDeleteDiary, handleupdateDiary, updateLoading, deletingID, updatingID })=>{
   const result = diaryList.map((diary)=>{
@@ -13,7 +14,11 @@ const DiaryList = ({ diaryList, handleDeleteDiary, handleupdateDiary, updateLoad
               />
   });
 
-  return result;
+  return (
+    <div className="diary-list">
+      {result}
+    </div>
+  );
 }
 
 export default DiaryList;
