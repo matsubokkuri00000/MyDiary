@@ -42,6 +42,24 @@
     box-sizing: border-box;
 }
 
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.sidebar-link.active {
+    font-weight: bold;
+    background-color: #eee;
+}
+
 .main-content {
     flex: 1;
     padding: 24px;

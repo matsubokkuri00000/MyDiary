@@ -31,12 +31,6 @@ const ToDoList = () => {
 
     return (
         <>
-            <Link 
-                to="/"
-            >
-                戻る
-            </Link>
-
             <div>
                 <h1>ToDoリスト</h1>
                 <p 
