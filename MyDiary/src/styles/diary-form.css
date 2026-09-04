@@ -1,0 +1,73 @@
+.diary-form-section {
+    border: 1px solid;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.diary-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.diary-form input,
+.diary-form textarea {
+    width:  100%;
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+.diary-submit-button {
+    align-self: flex-end;
+    padding: 10px 24px;
+
+    border: 1px solid #CCC;
+    border-radius: 8px;
+
+    background-color: white;
+    cursor: pointer;
+}
+
+.diary-submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.diary-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.diary-form-header {
+    margin-bottom: 20px;
+}
+
+.diary-form-header h2{
+    margin: 0;
+    font-size: 24px;
+}
+
+.diary-form-header p {
+    margin: 0px 0 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.form-error {
+    margin: 0;
+    font-size: 14px;
+    color: #c0392b;
+}
+
