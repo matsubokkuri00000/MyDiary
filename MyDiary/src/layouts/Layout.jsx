@@ -9,7 +9,7 @@ const Layout = () => {
         <>
             <div className="app-container">
                 <header>
-                    <h1>MyDiary</h1>
+                    <h1 className="app-title">MyDiary</h1>
                     <button onClick={signOut}>
                         ログアウト
                     </button>

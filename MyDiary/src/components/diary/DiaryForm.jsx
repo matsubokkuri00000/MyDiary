@@ -42,7 +42,7 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
 
         <form onSubmit={DiaryChekker}>
           
-          <div>
+          <div className="input-wrapper">
             <label>
               <p>タイトル：</p>
               <input 
