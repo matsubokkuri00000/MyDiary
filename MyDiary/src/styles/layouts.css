@@ -57,8 +57,16 @@
     display: block;
     padding: 10px 12px;
     border-radius: 8px;
+
     color: var(--color-text-muted);
     text-decoration: none;
+
+    transition: 0.2s;
+}
+
+.sidebar-link:not(.active):hover {
+    color: var(--color-text);
+    background-color: var(--color-surface-light);
 }
 
 .sidebar-link.active {

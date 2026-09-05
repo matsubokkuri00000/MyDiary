@@ -20,6 +20,10 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
 
     if(!diary_title.trim() && !diary_main.trim()){
       setErrorMessage("タイトルか本文を書いてください");
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000)
       return;
     }
 
@@ -68,11 +72,13 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
           />
         </div>
 
-        {errorMessage && (
-          <p className="form-error">
-            {errorMessage}
-          </p>
-        )}
+        <div className="form-message">
+          {errorMessage && (
+            <p className="form-error">
+              {errorMessage}
+            </p>
+          )}
+        </div>
 
         <button 
           className="diary-submit-button"

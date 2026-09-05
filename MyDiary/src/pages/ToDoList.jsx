@@ -19,6 +19,10 @@ const ToDoList = () => {
     const handleAddTodo = () => {
         if(!todoTitle.trim())  {
             setInputError("ToDoを入力してください");
+
+            setTimeout(() => {
+                setInputError("");
+            }, 3000);
             return;
         }
 
