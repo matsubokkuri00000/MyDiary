@@ -7,7 +7,14 @@
 .todo-page {
     display: flex;
     flex-direction: column;
+
+    padding: 24px;
     gap: 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    background-color: var(--color-surface);
 }
 
 .todo-header h1 {

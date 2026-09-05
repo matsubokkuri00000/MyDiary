@@ -1,12 +1,18 @@
 import useDiaries from "../hooks/useDiaries";
 import DiaryForm from "../components/diary/DiaryForm";
 import DiaryList from "../components/diary/DiaryList";
+import Toast from "../components/toast/Toast";
 
 const DiaryPage = () => {
-    const {diaryList, deletingID, updatingID, fetchLoading, addLoading, addDiary, deleteDiary, updateDiary} = useDiaries();
+    const {diaryList, deletingID, updatingID, fetchLoading, addLoading, addDiary, deleteDiary, updateDiary, successMessage, errorMessage} = useDiaries();
 
      return (
         <>
+            <Toast 
+                message={successMessage || errorMessage}
+                type={errorMessage ? "error" : "success"}
+            />
+
             {fetchLoading
                 ? (
                     <p>Now Loading...</p>
