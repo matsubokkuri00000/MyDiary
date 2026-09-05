@@ -58,6 +58,7 @@ const ToDoList = () => {
                     className="todo-input"
                     value={todoTitle}
                     onChange={handleTitle}
+                    placeholder="＋新しいToDo"
                 />
 
                 <button

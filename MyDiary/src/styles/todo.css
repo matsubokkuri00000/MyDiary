@@ -126,3 +126,20 @@
 
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .todo-form {
+        flex-direction: column;
+        align-items: center;
+    }    
+
+    .todo-input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .todo-add-button,
+    .todo-delete-completed-button {
+        width: 50%;
+    }
+}

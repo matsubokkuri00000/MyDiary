@@ -54,21 +54,23 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
       >
         
         <div className="form-group">
-          <label htmlFor="diary-title">タイトル</label>
+          <label className="visually-hidden" htmlFor="diary-title">タイトル</label>
           <input 
             id="diary-title"
             value={diary_title} 
             onChange={handleTitle}
             onKeyDown={handleTitleKeyDown}
+            placeholder="タイトル（任意）"
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="diary-main">本文</label>
+          <label className="visually-hidden"  htmlFor="diary-main">本文</label>
           <textarea 
             id="diary-main"
             value={diary_main} 
             onChange={handleMainDiary}
+            placeholder="今の気持ち、考えたこと、気づき、なんでも書いてみよう"
           />
         </div>
 
