@@ -10,7 +10,11 @@ const ToDos = ({ todoList, handleToggle }) => {
             />
     })
 
-    return result;
+    return (
+        <div className="todo-list">
+            {result}
+        </div>
+    );
 }
 
 export default ToDos;

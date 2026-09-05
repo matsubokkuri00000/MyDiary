@@ -1,6 +1,12 @@
 const ToDo = ({ todo, handleToggle }) => {
     return (
-        <div className="todo-item">   
+        <div 
+            className={
+                todo.is_completed
+                    ? "todo-item completed"
+                    : "todo-item"
+            }
+        >   
             <label className="todo-item-label">
                 <input 
                     type="checkbox"
@@ -10,7 +16,13 @@ const ToDo = ({ todo, handleToggle }) => {
                     }}
                 />
 
-                <span className="todo-item-text">
+                <span 
+                    className={
+                        todo.is_completed
+                            ? "todo-item-text completed"
+                            : "todo-item-text"
+                    }
+                >
                     {todo.task}
                 </span>
             </label>

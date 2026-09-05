@@ -5,16 +5,24 @@ import "../styles/todo.css"
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
-    const { tasks, loading, addTodo, deleteTodo, toggleTodo, successMessage } = useTodos();
+    const [inputError, setInputError] = useState("");
+    const { tasks, loading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
+
+        if(inputError){
+            setInputError("");
+        }
     }
 
     const handleAddTodo = () => {
-        if(!todoTitle){
+        if(!todoTitle.trim())  {
+            setInputError("ToDoを入力してください");
             return;
         }
+
+        setInputError("");
 
         addTodo(todoTitle);
 
@@ -34,9 +42,21 @@ const ToDoList = () => {
             <div className="todo-header">
                 <h1>ToDoリスト</h1>
 
-                <p className="todo-message">
-                    {successMessage}
-                </p>
+                <div className="todo-messages">
+                    {inputError ? (
+                        <p className="todo-error">
+                            {inputError}
+                        </p>
+                    ) : errorMessage ? (
+                        <p className="todo-error">
+                            {errorMessage}
+                        </p>
+                    ) : (
+                        <p className="todo-message">
+                            {successMessage}
+                        </p>
+                    )}
+                </div>
             </div>
 
             <div className="todo-form">
