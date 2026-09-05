@@ -31,11 +31,16 @@
     font-size: 16px;
 }
 
+.diary-form input:hover,
+.diary-form textarea:hover {
+    border-color: var(--color-gold);
+}
+
 .diary-form input:focus,
 .diary-form textarea:focus {
     border-color: var(--color-gold);
     outline: none;
-    box-shadow: 0 0 0 2px var(--color-gold);
+    box-shadow: 0 0 10px var(--color-gold);
 }
 
 .diary-submit-button {
@@ -70,7 +75,7 @@
 .form-group {
     display: flex;
     flex-direction: column;
-    gap:5px;
+    gap:8px;
 }
 
 .diary-form-header {

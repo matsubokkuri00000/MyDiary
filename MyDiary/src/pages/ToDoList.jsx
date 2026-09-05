@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ToDos from "../components/todo/ToDos";
 import useTodos from "../hooks/useTodos";
+import "../styles/todo.css"
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
@@ -52,9 +53,7 @@ const ToDoList = () => {
                 >
                     追加
                 </button>
-            </div>
-
-            <div className="todo-actions">
+                
                 <button
                     className="todo-delete-completed-button"
                     onClick={handleDelete}
