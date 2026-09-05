@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ToDos from "../components/todo/ToDos";
 import useTodos from "../hooks/useTodos";
+import Toast from "../components/toast/Toast";
 import "../styles/todo.css"
 
 const ToDoList = () => {
@@ -43,24 +44,13 @@ const ToDoList = () => {
 
     return (
         <section className="todo-page">
+            <Toast
+                message={successMessage || errorMessage}
+                type={errorMessage ? "error" : "success"}          
+            />
+
             <div className="todo-header">
                 <h1>ToDoリスト</h1>
-
-                <div className="todo-messages">
-                    {inputError ? (
-                        <p className="todo-error">
-                            {inputError}
-                        </p>
-                    ) : errorMessage ? (
-                        <p className="todo-error">
-                            {errorMessage}
-                        </p>
-                    ) : (
-                        <p className="todo-message">
-                            {successMessage}
-                        </p>
-                    )}
-                </div>
             </div>
 
             <div className="todo-form">
@@ -85,6 +75,14 @@ const ToDoList = () => {
                 >
                     完了済みのタスクを削除
                 </button>
+            </div>
+
+            <div className="todo-input-message">
+                {inputError && (
+                    <p className="todo-error">
+                        {inputError}
+                    </p>
+                )}
             </div>
 
             <ToDos 

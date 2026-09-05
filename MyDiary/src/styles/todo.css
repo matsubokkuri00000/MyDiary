@@ -7,28 +7,20 @@
 .todo-page {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 12px;
 }
 
 .todo-header h1 {
     margin: 0;
 }
 
-.todo-messages {
+.todo-input-message {
     min-height: 1.5em;
-    margin-top: 8px;
 }
 
-.todo-message,
 .todo-error {
     margin: 0;
-}
-
-.todo-message {
-    color: var(--color-text-muted);
-}
-
-.todo-error {
+    font-size: 14px;
     color: #e57373;
 }
 
@@ -63,6 +55,8 @@
     outline: none;
     box-shadow: 0 0 10px var(--color-gold);
 }
+
+
 
 .todo-add-button,
 .todo-delete-completed-button {
