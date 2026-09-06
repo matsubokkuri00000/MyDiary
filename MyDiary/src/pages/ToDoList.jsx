@@ -2,7 +2,7 @@ import { useState } from "react";
 import ToDos from "../components/todo/ToDos";
 import useTodos from "../hooks/useTodos";
 import Toast from "../components/toast/Toast";
-import Loading from "../components/Loading/Loading.jsx";
+import Loading from "../components/loading/Loading.jsx";
 import "../styles/todo.css"
 
 
