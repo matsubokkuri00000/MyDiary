@@ -1,0 +1,51 @@
+.calendar-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    height: calc(100vh - 160px);
+}
+
+.calendar-right {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-y: auto;
+    min-height: 0;
+}
+
+
+.rdp-root {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    padding: 20px;
+
+    --rdp-selected-border: 1px solid var(--color-gold);
+    --rdp-day_button-border-radius: 8px;
+    --rdp-accent-color: var(--color-gold);
+}
+
+.rdp-selected .rdp-day_button {
+    background-color: var(--color-surface-light);
+    color: var(--color-gold);
+}
+
+.rdp-day_button:hover {
+    background-color: var(--color-surface-light);
+    color: var(--color-gold);
+}
+
+@media (max-width: 768px) {
+    .calendar-layout {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .calendar-right {
+        overflow-y: visible;
+    }
+}
