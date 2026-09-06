@@ -2,12 +2,14 @@ import { useState } from "react";
 import ToDos from "../components/todo/ToDos";
 import useTodos from "../hooks/useTodos";
 import Toast from "../components/toast/Toast";
+import Loading from "../components/Loading/Loading.jsx";
 import "../styles/todo.css"
+
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
     const [inputError, setInputError] = useState("");
-    const { tasks, loading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
+    const { tasks, loading, fetchLoading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
@@ -45,51 +47,60 @@ const ToDoList = () => {
     return (
         <section className="todo-page">
             <Toast
-                message={successMessage || errorMessage}
+                message={errorMessage  || successMessage}
                 type={errorMessage ? "error" : "success"}          
             />
 
-            <div className="todo-header">
-                <h1>ToDoリスト</h1>
-            </div>
+            {fetchLoading
+                ? (
+                    <Loading />
+                )
+                : (
+                    <>
+                        <div className="todo-header">
+                            <h1>ToDoリスト</h1>
+                        </div>
 
-            <div className="todo-form">
-                <input
-                    className="todo-input"
-                    value={todoTitle}
-                    onChange={handleTitle}
-                    placeholder="＋新しいToDo"
-                />
+                        <div className="todo-form">
+                            <input
+                                className="todo-input"
+                                value={todoTitle}
+                                onChange={handleTitle}
+                                placeholder="＋新しいToDo"
+                            />
 
-                <button
-                    className="todo-add-button"
-                    onClick={handleAddTodo}
-                    disabled={loading}
-                >
-                    追加
-                </button>
-                
-                <button
-                    className="todo-delete-completed-button"
-                    onClick={handleDelete}
-                    disabled={loading}
-                >
-                    完了済みのタスクを削除
-                </button>
-            </div>
+                            <button
+                                className="todo-add-button"
+                                onClick={handleAddTodo}
+                                disabled={loading}
+                            >
+                                追加
+                            </button>
+                            
+                            <button
+                                className="todo-delete-completed-button"
+                                onClick={handleDelete}
+                                disabled={loading}
+                            >
+                                完了済みのタスクを削除
+                            </button>
+                        </div>
 
-            <div className="todo-input-message">
-                {inputError && (
-                    <p className="todo-error">
-                        {inputError}
-                    </p>
-                )}
-            </div>
+                        <div className="todo-input-message">
+                            {inputError && (
+                                <p className="todo-error">
+                                    {inputError}
+                                </p>
+                            )}
+                        </div>
 
-            <ToDos 
-                todoList={tasks}
-                handleToggle={handleToggle}
-            />
+                        <ToDos 
+                            todoList={tasks}
+                            handleToggle={handleToggle}
+                        />
+                </>
+                )
+            }
         </section>
     )
 }

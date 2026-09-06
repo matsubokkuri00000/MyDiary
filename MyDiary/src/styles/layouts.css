@@ -87,7 +87,6 @@
     .app-header {
         height: auto;
         min-height: 64px;
-
         flex-wrap: wrap;
         padding: 12px 16px;
     }
@@ -95,10 +94,12 @@
     .header-right {
         flex-wrap: wrap;
         gap: 8px;
+        min-width: 0;
     }
 
     .header-right p {
-        white-space: nomal;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .app-body {
@@ -114,9 +115,13 @@
     }
 
     .sidebar-nav {
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
         gap: 8px;
-        flex-wrap: wrap;
+    }
+
+    .sidebar-link {
+        text-align: center;
     }
 
     .main-content {
