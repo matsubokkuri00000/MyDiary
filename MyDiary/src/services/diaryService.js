@@ -44,3 +44,21 @@ export const updateDiary = async (ID, newTitle, newDiary) => {
     
     return { error };
 }
+
+export const fetchDiariesByDate = async (date) => {
+    const startDate = new Date(date);
+    startDate.setHours(0, 0, 0, 0);
+
+    const nextDate = new Date(date);
+    nextDate.setDate(nextDate.getDate() + 1);
+    nextDate.setHours(0, 0, 0, 0);
+
+    const { data, error } = await supabase
+        .from("diaries")
+        .select("*")
+        .gte("created_at", startDate.toISOString())
+        .lt("created_at", nextDate.toISOString())
+        .order("created_at", { ascending: true });
+
+    return { data, error };    
+}
