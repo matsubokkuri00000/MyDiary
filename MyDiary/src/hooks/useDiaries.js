@@ -1,6 +1,11 @@
 import { useState, useEffect, useContext } from "react";
-import { supabase } from "../services/supabase";
 import AuthContext from "../contexts/AuthContext";
+import { 
+    fetchAllDiaries,
+    addDiary as addDiaryService,
+    deleteDiary as deleteDiaryService,
+    updateDiary as updateDiaryService
+ } from "../services/diaryService";
 
 const useDiaries = ()=>{
     const [diaryList, setDiaryList] = useState([]);
@@ -10,9 +15,9 @@ const useDiaries = ()=>{
     const [deletingID, setDeletingId] = useState(null);
     const [updatingID, setupdatingID] = useState(null);
     const [updateLoading, setUpdateLoading] = useState(false);
-    const { user } = useContext(AuthContext);
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const { user } = useContext(AuthContext);
 
     //テスト用
     const sleep = (ms) => {
@@ -38,18 +43,13 @@ const useDiaries = ()=>{
             setErrorMessage("");
             setSuccessMessage("");
 
-            const { data, error } = await supabase
-                .from("diaries")
-                .select("*")
-                .order("created_at", {ascending: false});
+            const { data, error } = await fetchAllDiaries();
             
             if(error){
                 console.log(error);
                 setErrorMessage("日記一覧の取得に失敗しました");
                 return;
             }
-
-            //const reverseData = [...data].reverse()
 
             setDiaryList(data);
             
@@ -68,16 +68,12 @@ const useDiaries = ()=>{
             setErrorMessage("");
             setSuccessMessage("");
 
-            const { error } = await supabase
-                .from("diaries")
-                .insert([
-                    {
-                        user_id : user.id,
-                        title: diary_title,
-                        main_text: diary_main
-                    }
-                ]);
-
+            const { error } = await addDiaryService(
+                user.id,
+                diary_title,
+                diary_main
+            );
+ 
             if(error){
                 console.log(error);
                 setErrorMessage("日記の追加に失敗しました");
@@ -106,12 +102,9 @@ const useDiaries = ()=>{
             setSuccessMessage("");
 
             //テスト用
-            await sleep(500);
-
-            const { error } = await supabase
-                .from("diaries")
-                .delete()
-                .eq("id", ID)
+            //await sleep(500);
+       
+            const { error } = await deleteDiaryService(ID);
 
             if(error){
                 console.log(error);
@@ -143,15 +136,13 @@ const useDiaries = ()=>{
 
 
             //テスト用
-            await sleep(500);
+            //await sleep(500);
 
-            const { error } = await supabase
-                .from("diaries")
-                .update({
-                    title: newTitle,
-                    main_text: newDiary
-                })
-                .eq("id", ID)
+            const { error } = await updateDiaryService(
+                ID, 
+                newTitle, 
+                newDiary
+            );
 
             if(error){
                 console.log(error);
