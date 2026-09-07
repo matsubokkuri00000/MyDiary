@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect} from "react";
 import "../../styles/diary-card.css";
 
 const Diary = ({ 
@@ -13,6 +13,8 @@ const Diary = ({
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
     const [new_diary_main, setNewMainDiary] = useState(diary.main_text);
+
+    const menuRef = useRef(null);
 
     const handleDelete = ()=>{
         const result = window.confirm("この日記を削除しますか？");
@@ -49,6 +51,23 @@ const Diary = ({
             setEditing(false)
         }
     }
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if(
+                menuRef.current &&
+                !menuRef.current.contains(event.target)
+            ){
+                setIsMenuOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
 
     if(isEditing){
@@ -120,7 +139,10 @@ const Diary = ({
                         {diary.main_text}
                     </p>
 
-                    <div className="calendar-diary-menu-wrapper">
+                    <div 
+                        className="calendar-diary-menu-wrapper"
+                        ref={menuRef}
+                    >
                         <button
                             className="calendar-diary-menu-button"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
