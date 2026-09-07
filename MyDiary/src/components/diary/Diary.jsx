@@ -10,6 +10,7 @@ const Diary = ({
     variant
 })=>{
     const [isEditing, setEditing] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
     const [new_diary_main, setNewMainDiary] = useState(diary.main_text);
 
@@ -52,7 +53,7 @@ const Diary = ({
 
     if(isEditing){
         return (
-            <article className={`diary-card ${variant === "compact"} ? "compact" : ""` }>
+            <article className={`diary-card ${variant === "calendar"} ? "calendar" : ""` }>
                 <p className="diary-editing-label">
                     編集中・・・
                 </p>
@@ -103,8 +104,60 @@ const Diary = ({
         );
     }
 
+    if (variant === "calendar" && !isEditing) {
+        return (
+            <article className="diary-card calendar-diary-card">
+                <div className="calendar-diary-row">
+
+                    <p className="calendar-diary-time">
+                        {new Date(diary.created_at).toLocaleTimeString("ja-JP", {
+                            hour: "2-digit",
+                            minute: "2-digit"
+                        })}
+                    </p>
+
+                    <p className="calendar-diary-body">
+                        {diary.main_text}
+                    </p>
+
+                    <div className="calendar-diary-menu-wrapper">
+                        <button
+                            className="calendar-diary-menu-button"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        >
+                            ︙
+                        </button>
+
+                        {isMenuOpen && (
+                            <div className="calendar-diary-menu">
+                                <button
+                                    className="calendar-menu-delete"
+                                    onClick={handleDelete}
+                                    disabled={deletingID !== null}
+                                >
+                                    削除
+                                </button>
+
+                                <button
+                                className="calendar-menu-edit"
+                                    onClick={() => {
+                                        handleEditMode();
+                                        setIsMenuOpen(false);
+                                    }}
+                                >
+                                    編集
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+                </div>
+            </article>
+        );
+    }
+
     return(
-        <article className={`diary-card ${variant === "compact" ? "compact" : ""}`}>
+        <article className={`diary-card ${variant === "calendar" ? "calendar" : ""}`}>
             <div className="diary-card-meta">
                 <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
 

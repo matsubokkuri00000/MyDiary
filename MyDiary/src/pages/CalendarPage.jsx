@@ -95,7 +95,7 @@ const CalendarPage = () => {
                                                 }
                                                 deletingID={deletingID}
                                                 updatingID={updatingID}
-                                                variant = "compact"
+                                                variant = "calendar"
                                             />
                                         )
                                         : (
