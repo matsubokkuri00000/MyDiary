@@ -1,7 +1,14 @@
 import { useState } from "react";
 import "../../styles/diary-card.css";
 
-const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updatingID })=>{
+const Diary = ({ 
+    diary, 
+    handleDeleteDiary, 
+    handleupdateDiary, 
+    deletingID, 
+    updatingID ,
+    variant
+})=>{
     const [isEditing, setEditing] = useState(false);
     const [new_diary_title, setNewTitle] = useState(diary.title);
     const [new_diary_main, setNewMainDiary] = useState(diary.main_text);
@@ -45,7 +52,7 @@ const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updati
 
     if(isEditing){
         return (
-            <article className="diary-card">
+            <article className={`diary-card ${variant === "compact"} ? "compact" : ""` }>
                 <p className="diary-editing-label">
                     編集中・・・
                 </p>
@@ -97,7 +104,7 @@ const Diary = ({ diary, handleDeleteDiary, handleupdateDiary, deletingID, updati
     }
 
     return(
-        <article className="diary-card">
+        <article className={`diary-card ${variant === "compact" ? "compact" : ""}`}>
             <div className="diary-card-meta">
                 <p>作成日時：{new Date(diary.created_at).toLocaleString("ja-JP")}</p>
 

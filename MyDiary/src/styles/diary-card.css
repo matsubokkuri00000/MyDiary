@@ -109,8 +109,15 @@
 .diary-edit-group textarea:focus {
     border-color: var(--color-gold);
     outline: none;
-    box-shadow: 0 0 0 2px var(--color-gold);
+    box-shadow: 0 0 10px var(--color-gold);
 }
+
+
+.diary-edit-group input:hover,
+.diary-edit-group textarea:hover {
+    border-color: var(--color-gold);
+}
+
 
 .diary-edit-button:hover,
 .diary-cancel-button:hover,
@@ -122,4 +129,21 @@
 .diary-delete-button:not(:disabled):hover {
     border: 1px solid #c0392b;
     color: #e57373;    
+}
+
+.diary-card.compact {
+    padding: 16px;
+}
+
+.diary-card.diary-card.compact .diary-card-title {
+    font-size: 16px;
+}
+
+.diary-card.diary-card.compact .diary-card-body {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.diary-card.diary-card.compact .diary-card-actions button {
+    padding: 6px 10px;
 }

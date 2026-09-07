@@ -162,6 +162,25 @@
     background-color: var(--color-surface-light);
 }
 
+.calendar-right-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    margin-bottom: 20px;
+}
+
+.calendar-right-header h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.calendar-right-count {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 14px;
+}
+
 @media (max-width: 768px) {
     .calendar-layout {
         grid-template-columns: 1fr;

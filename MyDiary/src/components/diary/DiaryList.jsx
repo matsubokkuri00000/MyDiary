@@ -1,7 +1,15 @@
 import Diary from "./Diary";
 import "../../styles/diary-list.css"
 
-const DiaryList = ({ diaryList, handleDeleteDiary, handleupdateDiary, updateLoading, deletingID, updatingID })=>{
+const DiaryList = ({ 
+  diaryList, 
+  handleDeleteDiary, 
+  handleupdateDiary, 
+  updateLoading, 
+  deletingID, 
+  updatingID, 
+  variant 
+})=>{
   const result = diaryList.map((diary)=>{
       return <Diary 
                 key={diary.id}
@@ -11,6 +19,7 @@ const DiaryList = ({ diaryList, handleDeleteDiary, handleupdateDiary, updateLoad
                 updateLoading={updateLoading}
                 deletingID={deletingID}
                 updatingID={updatingID}
+                variant={variant}
               />
   });
 

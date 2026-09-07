@@ -59,9 +59,23 @@ const CalendarPage = () => {
                     </div>
 
                     <div className="calendar-right">
-                        <p>
-                            選択中の日付：{selectedDate?.toLocaleDateString()}
-                        </p>  
+
+                        <div className="calendar-right-header">
+                            <div>
+                                <h3>
+                                    {selectedDate?.toLocaleDateString("ja-JP", {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                        weekday: "short"
+                                    })}
+                                </h3>
+
+                                <p className="calendar-right-count">
+                                    この日の記録：{selectedDiaries.length}件
+                                </p>
+                            </div>
+                        </div>
 
                         {loading
                             ? (
@@ -81,6 +95,7 @@ const CalendarPage = () => {
                                                 }
                                                 deletingID={deletingID}
                                                 updatingID={updatingID}
+                                                variant = "compact"
                                             />
                                         )
                                         : (
