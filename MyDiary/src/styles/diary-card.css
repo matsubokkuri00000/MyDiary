@@ -112,12 +112,10 @@
     box-shadow: 0 0 10px var(--color-gold);
 }
 
-
 .diary-edit-group input:hover,
 .diary-edit-group textarea:hover {
     border-color: var(--color-gold);
 }
-
 
 .diary-edit-button:hover,
 .diary-cancel-button:hover,
@@ -125,11 +123,15 @@
     border-color: var(--color-gold);
 }
 
-
 .diary-delete-button:not(:disabled):hover {
     border: 1px solid #c0392b;
-    color: #e57373;    
+    color: #e57373;
 }
+
+
+/* =========================
+   Calendar Variant
+========================= */
 
 .diary-card.calendar {
     padding: 8px;
@@ -151,7 +153,7 @@
 .calendar-diary-row {
     display: grid;
     grid-template-columns: 40px 1fr auto;
-    gap: 8px;
+    gap: 20px;
     align-items: start;
 }
 
@@ -166,10 +168,48 @@
     line-height: 1.5;
 }
 
+
+/* =========================
+   Three-dot Menu
+========================= */
+
 .calendar-diary-menu-wrapper {
     position: relative;
 }
 
+
+/* ︙ボタン本体 */
+.calendar-diary-menu-button {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+
+    font-size: 18px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calendar-diary-menu-button:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+
+/* 展開後のメニュー */
 .calendar-diary-menu {
     position: absolute;
 
@@ -184,12 +224,20 @@
 
 .calendar-diary-menu button {
     position: absolute;
+    top: 0;
+    right: 0;
 
     width: 42px;
     height: 42px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
     border: 1px solid var(--color-border);
-    border-radius: 50%;
+    border-radius: 12px;
 
     background-color: var(--color-surface-light);
     color: var(--color-text);
@@ -199,16 +247,20 @@
     transition: 0.2s;
 }
 
-.calendar-diary-menu button {
-    position: absolute;
-    right: 0;
-    top: 0;
-}
-
 .calendar-menu-edit {
-    transform: translate(-40px, -40px);
+    transform: translate(-20px, -50px);
 }
 
 .calendar-menu-delete {
-    transform: translate(55px, 0);
+    transform: translate(30px, -50px);
+}
+
+.calendar-menu-edit:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+.calendar-menu-delete:hover {
+    border-color: #c0392b;
+    color: #e57373;
 }
