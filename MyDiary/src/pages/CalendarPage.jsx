@@ -59,7 +59,6 @@ const CalendarPage = () => {
                     </div>
 
                     <div className="calendar-right">
-
                         <div className="calendar-right-header">
                             <div>
                                 <h3>
@@ -76,38 +75,40 @@ const CalendarPage = () => {
                                 </p>
                             </div>
                         </div>
-
-                        {loading
-                            ? (
-                                <Loading />
-                            )
-                            : (
-                                <>
-                                    {selectedDiaries.length > 0
-                                        ? (
-                                            <DiaryList 
-                                                diaryList={selectedDiaries}
-                                                handleDeleteDiary={(ID) => 
-                                                    deleteDiary(ID, selectedDate)
-                                                }
-                                                handleupdateDiary={(ID, newTitle, newDiary) => 
-                                                    updateDiary(ID, newTitle, newDiary, selectedDate)
-                                                }
-                                                deletingID={deletingID}
-                                                updatingID={updatingID}
-                                                variant = "calendar"
-                                            />
-                                        )
-                                        : (
-                                            <p>この日の日記はありません</p>
-                                        )
-                                    }
-                                </>
-                            )
-                        }
-    
-                    </div>
-                    
+                        
+                        <div className="calendar-right-list">
+                            {loading
+                                ? (
+                                    <Loading />
+                                )
+                                : (
+                                    <>
+                                        {selectedDiaries.length > 0
+                                            ? (
+                                                <DiaryList 
+                                                    diaryList={selectedDiaries}
+                                                    handleDeleteDiary={(ID) => 
+                                                        deleteDiary(ID, selectedDate)
+                                                    }
+                                                    handleupdateDiary={(ID, newTitle, newDiary) => 
+                                                        updateDiary(ID, newTitle, newDiary, selectedDate)
+                                                    }
+                                                    deletingID={deletingID}
+                                                    updatingID={updatingID}
+                                                    variant = "calendar"
+                                                />
+                                            )
+                                            : (
+                                                <div className="calendar-right-list-none">
+                                                    <p>この日の日記はありません</p>
+                                                </div>
+                                            )
+                                        }
+                                    </>
+                                )
+                            }
+                        </div>
+                    </div>                    
                 </div>       
             </section>
         
