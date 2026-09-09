@@ -1,44 +1,28 @@
-import { Link } from "react-router-dom";
 import useDiaries from "../hooks/useDiaries";
 import DiaryForm from "../components/diary/DiaryForm";
-import DiaryList from "../components/diary/DiaryList";
+//import DiaryList from "../components/diary/DiaryList";
+import Toast from "../components/toast/Toast";
+import Loading from "../components/loading/Loading.jsx";
 
 const DiaryPage = () => {
-    const {diaryList, deletingID, updatingID, fetchLoading, addLoading, addDiary, deleteDiary, updateDiary} = useDiaries();
+    const {fetchLoading, addLoading, addDiary, successMessage, errorMessage} = useDiaries();
 
      return (
         <>
+            <Toast 
+                message={ errorMessage || successMessage}
+                type={errorMessage ? "error" : "success"}
+            />
+
             {fetchLoading
                 ? (
-                    <p>Now Loading...</p>
+                    <Loading />
                 )
                 : (
-                    <>
-                        <DiaryForm 
-                            handleAddDiary={addDiary}
-                            addLoading={addLoading}
-                        />
-
-                        <Link to="/todolist">
-                            ToDoリスト
-                        </Link>
-
-                        <p>----一覧表示-----</p>
-                        {diaryList.length > 0 
-                            ? (
-                                <DiaryList 
-                                    diaryList={diaryList}
-                                    handleDeleteDiary={deleteDiary}
-                                    handleupdateDiary={updateDiary}
-                                    updatingID={updatingID}
-                                    deletingID={deletingID}
-                                />
-                            ) 
-                            : (
-                                <p>保存された日記はありません</p>
-                            ) 
-                        }
-                    </>
+                    <DiaryForm 
+                        handleAddDiary={addDiary}
+                        addLoading={addLoading}
+                    />
                 )
             }
         </>

@@ -1,20 +1,35 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import ToDos from "../components/todo/ToDos";
 import useTodos from "../hooks/useTodos";
+import Toast from "../components/toast/Toast";
+import Loading from "../components/loading/Loading.jsx";
+import "../styles/todo.css"
+
 
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
-    const { tasks, loading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
+    const [inputError, setInputError] = useState("");
+    const { tasks, loading, fetchLoading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
 
     const handleTitle = (event) => {
         setTodoTitle(event.target.value);
+
+        if(inputError){
+            setInputError("");
+        }
     }
 
     const handleAddTodo = () => {
-        if(!todoTitle){
+        if(!todoTitle.trim())  {
+            setInputError("ToDoを入力してください");
+
+            setTimeout(() => {
+                setInputError("");
+            }, 3000);
             return;
         }
+
+        setInputError("");
 
         addTodo(todoTitle);
 
@@ -30,50 +45,63 @@ const ToDoList = () => {
     }
 
     return (
-        <>
-            <Link 
-                to="/"
-            >
-                戻る
-            </Link>
-
-            <div>
-                <h1>ToDoリスト</h1>
-                <p 
-                    style={
-                        { minHeight: "1.5em" }
-                    }
-                >
-                    {successMessage}
-                </p>
-            </div>
-
-            <input 
-                value={todoTitle}
-                onChange={handleTitle}
+        <section className="todo-page">
+            <Toast
+                message={errorMessage  || successMessage}
+                type={errorMessage ? "error" : "success"}          
             />
 
-            <button
-                onClick={handleAddTodo}
-                disabled={loading}
-            >
-                追加
-            </button>
+            {fetchLoading
+                ? (
+                    <Loading />
+                )
+                : (
+                    <>
+                        <div className="todo-header">
+                            <h1>ToDoリスト</h1>
+                        </div>
 
-            <button
-                onClick={handleDelete}
-                disabled={loading}
-            >
-                完了済みのタスクを削除
-            </button>
+                        <div className="todo-form">
+                            <input
+                                className="todo-input"
+                                value={todoTitle}
+                                onChange={handleTitle}
+                                placeholder="＋新しいToDo"
+                            />
 
-            <p>---------------------------------------------</p>
-            <ToDos 
-                todoList={tasks}
-                handleToggle={handleToggle}
-            />
+                            <button
+                                className="todo-add-button"
+                                onClick={handleAddTodo}
+                                disabled={loading}
+                            >
+                                追加
+                            </button>
+                            
+                            <button
+                                className="todo-delete-completed-button"
+                                onClick={handleDelete}
+                                disabled={loading}
+                            >
+                                完了済みのタスクを削除
+                            </button>
+                        </div>
 
-        </>
+                        <div className="todo-input-message">
+                            {inputError && (
+                                <p className="todo-error">
+                                    {inputError}
+                                </p>
+                            )}
+                        </div>
+
+                        <ToDos 
+                            todoList={tasks}
+                            handleToggle={handleToggle}
+                        />
+                </>
+                )
+            }
+        </section>
     )
 }
 

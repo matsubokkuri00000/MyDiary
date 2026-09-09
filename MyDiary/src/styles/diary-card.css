@@ -1,0 +1,266 @@
+.diary-card {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 24px;
+
+    background-color: var(--color-surface);
+}
+
+.diary-card-meta {
+    margin-bottom: 12px;
+}
+
+.diary-card-meta p {
+    margin: 0;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.diary-card-title {
+    margin: 0 0 12px;
+    font-size: 20px;
+}
+
+.diary-card-body {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.diary-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+
+    margin-top: 16px;
+}
+
+.diary-card-actions button {
+    padding: 8px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.diary-delete-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.diary-edit-button,
+.diary-cancel-button,
+.diary-delete-button {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+}
+
+.diary-editing-label {
+    margin: 0 0 16px;
+    font-size: 12px;
+    color: var(--color-text-muted);
+}
+
+.diary-edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.diary-edit-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.diary-edit-group input,
+.diary-edit-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 10px 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+
+    font-size: 16px;
+}
+
+.diary-edit-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.diary-save-button {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+}
+
+.diary-save-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.diary-edit-group input:focus,
+.diary-edit-group textarea:focus {
+    border-color: var(--color-gold);
+    outline: none;
+    box-shadow: 0 0 10px var(--color-gold);
+}
+
+.diary-edit-group input:hover,
+.diary-edit-group textarea:hover {
+    border-color: var(--color-gold);
+}
+
+.diary-edit-button:hover,
+.diary-cancel-button:hover,
+.diary-save-button:not(:disabled):hover {
+    border-color: var(--color-gold);
+}
+
+.diary-delete-button:not(:disabled):hover {
+    border: 1px solid #c0392b;
+    color: #e57373;
+}
+
+
+/* =========================
+   Calendar Variant
+========================= */
+
+.diary-card.calendar {
+    padding: 8px;
+}
+
+.diary-card.calendar .diary-card-title {
+    font-size: 16px;
+}
+
+.diary-card.calendar .diary-card-body {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.diary-card.calendar .diary-card-actions button {
+    padding: 6px 10px;
+}
+
+.calendar-diary-row {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    gap: 20px;
+    align-items: start;
+}
+
+.calendar-diary-time {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+.calendar-diary-body {
+    margin: 0;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   Three-dot Menu
+========================= */
+
+.calendar-diary-menu-wrapper {
+    position: relative;
+}
+
+
+/* ︙ボタン本体 */
+.calendar-diary-menu-button {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+
+    font-size: 18px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calendar-diary-menu-button:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+
+/* 展開後のメニュー */
+.calendar-diary-menu {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 0;
+    height: 0;
+
+    z-index: 10;
+}
+
+.calendar-diary-menu button {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.calendar-menu-edit {
+    transform: translate(-20px, -50px);
+}
+
+.calendar-menu-delete {
+    transform: translate(30px, -50px);
+}
+
+.calendar-menu-edit:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+.calendar-menu-delete:hover {
+    border-color: #c0392b;
+    color: #e57373;
+}

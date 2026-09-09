@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useState } from "react";
+import "../../styles/diary-form.css";
+
 
 const DiaryForm = ({ handleAddDiary, addLoading })=>{
   const [diary_title, setTitle] = useState("");
@@ -17,7 +19,11 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
     event.preventDefault();
 
     if(!diary_title.trim() && !diary_main.trim()){
-      setErrorMessage("タイトルか本文を書いてください");
+      setErrorMessage("本文を書いてください");
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 3000)
       return;
     }
 
@@ -36,35 +42,38 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
   }
 
   return (
-    <>
-      <p>------入力フォーム------</p>
+    <section className="diary-form-section">
+      <div className="diary-form-header">
+        <h2>入力フォーム</h2>
+        <p>思いついたことを自由に書く</p>
+      </div>
 
-      <form onSubmit={DiaryChekker}>
+      <form 
+        className="diary-form"
+        onSubmit={DiaryChekker}
+      >
         
-        <div>
-          <label>
-            <p>タイトル：</p>
-            <input 
-              value={diary_title} 
-              onChange={handleTitle}
-              onKeyDown={handleTitleKeyDown}
-            />
-          </label>
+
+        <div className="form-group">
+          <label className="visually-hidden"  htmlFor="diary-main">本文</label>
+          <textarea 
+            id="diary-main"
+            value={diary_main} 
+            onChange={handleMainDiary}
+            placeholder="今の気持ち、考えたこと、気づき、なんでも書いてみよう"
+          />
         </div>
 
-        <div>
-          <label>
-            <p>本文：</p>
-            <textarea 
-              value={diary_main} 
-              onChange={handleMainDiary}
-            />
-          </label>
+        <div className="form-message">
+          {errorMessage && (
+            <p className="form-error">
+              {errorMessage}
+            </p>
+          )}
         </div>
-
-        {errorMessage && <p>{errorMessage}</p>}
 
         <button 
+          className="diary-submit-button"
           type="submit"
           disabled={addLoading}
         >
@@ -72,7 +81,7 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
         </button>
 
       </form>
-    </>
+    </section>
   )
 }
 

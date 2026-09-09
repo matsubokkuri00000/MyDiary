@@ -6,6 +6,8 @@ import DiaryPage from "./pages/DiaryPage";
 import NotFound from "./pages/NotFound";
 import Layout from "./layouts/Layout";
 import ToDoList from "./pages/ToDoList";
+import CalendarPage from "./pages/CalendarPage";
+import FutureMeterPage from "./pages/FutureMeterPage";
 
 
 
@@ -45,16 +47,35 @@ function App (){
                 : <Navigate to="/login" />
             }
           />
-        </Route>
 
-        <Route 
-          path="/todolist"
-          element={
-            user
-              ? <ToDoList />
-              : <Navigate to="/login"/>
-          }
-        />
+          <Route 
+            path="/todolist"
+            element={
+              user
+                ? <ToDoList />
+                : <Navigate to="/login"/>
+            }
+          />
+
+          <Route 
+            path="/calendar"
+            element={
+              user 
+                ? <CalendarPage />
+                : <Navigate to="login"/>
+            }
+          />
+
+          <Route
+            path="/futuremeter"
+            element={
+              user 
+                ? <FutureMeterPage />
+                : <Navigate to="login"/>
+            }
+          />
+
+        </Route>
 
         <Route 
           path="*"

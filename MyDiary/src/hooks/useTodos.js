@@ -163,6 +163,7 @@ const useTodos = () => {
     return {
         tasks,
         loading,
+        fetchLoading,
         updateID,
         successMessage,
         errorMessage,

@@ -1,28 +1,22 @@
 import { Outlet } from "react-router-dom";
-import AuthContext from "../contexts/AuthContext";
-import { useContext } from "react";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import "../styles/layouts.css"
 
 const Layout = () => {
-    const {user, signOut, errorMessage, successMessage} = useContext(AuthContext);
 
     return (
-        <>
-            <header>
-                <h1>MyDiary</h1>
-                <button onClick={signOut}>
-                    ログアウト
-                </button>
-                <p>ログイン中のユーザ：{user?.email}</p>
+        <div className="app-container">
+            <Header />
 
-                {errorMessage && <p>{errorMessage}</p>}
-                {successMessage && <p>{successMessage}</p>}
+            <div className="app-body">
+                <Sidebar />
 
-            </header>
-
-            <main>
-                <Outlet />
-            </main>
-        </>
+                <main className="main-content">
+                    <Outlet />
+                </main>
+            </div>
+        </div>
     )
 }
 
