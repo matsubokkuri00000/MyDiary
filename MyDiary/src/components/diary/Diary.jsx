@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect} from "react";
+import { Pencil, Trash2 } from "lucide-react";
 import "../../styles/diary-card.css";
 
 const Diary = ({ 
@@ -72,7 +73,7 @@ const Diary = ({
 
     if(isEditing){
         return (
-            <article className={`diary-card ${variant === "calendar"} ? "calendar" : ""` }>
+            <article className={`diary-card ${variant === "calendar" ? "calendar" : ""}`}>
                 <p className="diary-editing-label">
                     編集中・・・
                 </p>
@@ -156,8 +157,9 @@ const Diary = ({
                                     className="calendar-menu-delete"
                                     onClick={handleDelete}
                                     disabled={deletingID !== null}
+                                    aria-label = "削除"
                                 >
-                                    削除
+                                    <Trash2 size={18} />
                                 </button>
 
                                 <button
@@ -166,8 +168,9 @@ const Diary = ({
                                         handleEditMode();
                                         setIsMenuOpen(false);
                                     }}
+                                    aria-label = "編集"
                                 >
-                                    編集
+                                    <Pencil size={18} />
                                 </button>
                             </div>
                         )}
