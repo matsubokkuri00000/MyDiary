@@ -19,7 +19,7 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
     event.preventDefault();
 
     if(!diary_title.trim() && !diary_main.trim()){
-      setErrorMessage("タイトルか本文を書いてください");
+      setErrorMessage("本文を書いてください");
 
       setTimeout(() => {
         setErrorMessage("");
@@ -53,16 +53,6 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
         onSubmit={DiaryChekker}
       >
         
-        <div className="form-group">
-          <label className="visually-hidden" htmlFor="diary-title">タイトル</label>
-          <input 
-            id="diary-title"
-            value={diary_title} 
-            onChange={handleTitle}
-            onKeyDown={handleTitleKeyDown}
-            placeholder="タイトル（任意）"
-          />
-        </div>
 
         <div className="form-group">
           <label className="visually-hidden"  htmlFor="diary-main">本文</label>

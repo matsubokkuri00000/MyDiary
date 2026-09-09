@@ -54,7 +54,11 @@
 }
 
 .sidebar-link {
-    display: block;
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
     padding: 10px 12px;
     border-radius: 8px;
 
@@ -121,7 +125,7 @@
     }
 
     .sidebar-link {
-        text-align: center;
+        justify-self: center;
     }
 
     .main-content {
