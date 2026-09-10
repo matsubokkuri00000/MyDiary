@@ -38,7 +38,7 @@ const useAuth = ()=>{
     }
 
     //新規登録
-    const signUp = async (email, password)=>{
+    const signUp = async (email, password, captchaToken)=>{
         
         try {
             setLoading(true);
@@ -46,7 +46,10 @@ const useAuth = ()=>{
 
             const { error } = await supabase.auth.signUp({
                 email,
-                password
+                password,
+                options: {
+                    captchaToken
+                }
             })
 
             if(error){
@@ -64,7 +67,7 @@ const useAuth = ()=>{
     }
     
     //ログイン
-    const signIn = async (email, password)=>{
+    const signIn = async (email, password, captchaToken)=>{
 
         try {
             setLoading(true);
@@ -72,7 +75,10 @@ const useAuth = ()=>{
 
             const { error } = await supabase.auth.signInWithPassword({
                 email,
-                password
+                password,
+                options: {
+                    captchaToken
+                }
             });
 
             if(error){
