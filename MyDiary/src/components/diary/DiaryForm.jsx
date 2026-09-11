@@ -6,18 +6,8 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
   const [diary_title, setTitle] = useState("");
   const [diary_main, setMainDiary] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isCooldown, setIsCooldown] = useState(false);
 
-/*
-  const handleTitle = (event)=>{
-    setTitle(event.target.value);
-  }
-
-    const handleTitleKeyDown = (event) => {
-    if(event.key === "Enter"){
-      event.preventDefault();
-    }
-  }
-*/
 
   const handleMainDiary = (event)=>{
     setMainDiary(event.target.value);
@@ -34,8 +24,14 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
       }, 3000)
       return;
     }
-
+    
     setErrorMessage("");
+
+    setIsCooldown(true);
+
+    setTimeout(() => {
+      setIsCooldown(false);
+    }, 3000);
 
     handleAddDiary(diary_title, diary_main);
 
@@ -83,7 +79,7 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
         <button 
           className="diary-submit-button"
           type="submit"
-          disabled={addLoading}
+          disabled={addLoading || isCooldown}
         >
           {addLoading ? "保存中..." : "保存"}
         </button>
