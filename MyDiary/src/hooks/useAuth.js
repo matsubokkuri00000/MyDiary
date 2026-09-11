@@ -15,9 +15,15 @@ const useAuth = ()=>{
 
             const { data, error } = await supabase.auth.getUser();
 
-            if(error){
+            if (error) {
                 console.log(error);
-                setErrorMessage("ログインしてください");
+
+                if (error.name === "AuthSessionMissingError") {
+                    setUser(null);
+                    return;
+                }
+
+                setErrorMessage("ログイン状態の確認に失敗しました");
                 return;
             }
 
