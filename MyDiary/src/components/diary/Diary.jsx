@@ -100,7 +100,12 @@ const Diary = ({
                             id={`edit-main-${diary.id}`}
                             value={new_diary_main}
                             onChange={handleUpdateMainDiary}
+                            maxLength={10000}
                         />
+
+                        <p className="diary-character-count">
+                            {new_diary_main.length} / 10000
+                        </p>
                     </div>
                 </div>
 

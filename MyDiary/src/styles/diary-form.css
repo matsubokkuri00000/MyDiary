@@ -114,3 +114,12 @@
 .form-message {
     min-height: 1.5em;;
 }
+
+.diary-character-count {
+    margin: 6px 0 0;
+
+    text-align: right;
+    font-size: 0.85rem;
+
+    color: var(--color-text-muted);
+}

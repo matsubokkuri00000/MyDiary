@@ -63,8 +63,13 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
             id="diary-main"
             value={diary_main} 
             onChange={handleMainDiary}
+            maxLength={10000}
             placeholder="今の気持ち、考えたこと、気づき、なんでも書いてみよう"
           />
+
+          <p className="diary-character-count">
+            {diary_main.length} / 10000
+          </p>
         </div>
 
         <div className="form-message">
