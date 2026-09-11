@@ -9,6 +9,7 @@ import "../styles/todo.css"
 const ToDoList = () => {
     const [todoTitle, setTodoTitle] = useState("");
     const [inputError, setInputError] = useState("");
+    const [isCooldown, setIsCooldown] = useState(false);
     const { tasks, loading, fetchLoading, addTodo, deleteTodo, toggleTodo, successMessage, errorMessage } = useTodos();
 
     const handleTitle = (event) => {
@@ -30,6 +31,12 @@ const ToDoList = () => {
         }
 
         setInputError("");
+
+        setIsCooldown(true);
+
+        setTimeout(() => {
+            setIsCooldown(false);
+        }, 1000)
 
         addTodo(todoTitle);
 
@@ -67,12 +74,17 @@ const ToDoList = () => {
                                 value={todoTitle}
                                 onChange={handleTitle}
                                 placeholder="＋新しいToDo"
+                                maxLength={200}
                             />
+
+                            <p className="todo-character-count">
+                                {todoTitle.length} / 200
+                            </p>
 
                             <button
                                 className="todo-add-button"
                                 onClick={handleAddTodo}
-                                disabled={loading}
+                                disabled={loading || isCooldown}
                             >
                                 追加
                             </button>
