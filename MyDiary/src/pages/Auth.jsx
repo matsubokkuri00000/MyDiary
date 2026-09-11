@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { Turnstile } from "@marsidev/react-turnstile";
 
@@ -11,6 +11,7 @@ const Auth = ()=>{
     const { errorMessage, signUp, signIn } = useContext(AuthContext);
 
     const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+    const turnstileRef = useRef(null);
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -22,7 +23,7 @@ const Auth = ()=>{
         setPassword(event.target.value)
     }
 
-    const handleSignUp = () => {
+    const handleSignUp = async () => {
 
         if( !email.trim() || !password ){
             setInputError("メールアドレスとパスワードを入力してください");
@@ -46,10 +47,14 @@ const Auth = ()=>{
 
 
         setInputError("");
-        signUp(email.trim(), password, captchaToken);
+
+        await signUp(email.trim(), password, captchaToken);
+
+        turnstileRef.current?.reset();
+        setCaptchaToken(null);
     }
 
-    const handleSignIn = (event) => {
+    const handleSignIn = async (event) => {
         event.preventDefault();
 
         if( !email.trim() || !password ){
@@ -68,7 +73,11 @@ const Auth = ()=>{
         }
 
         setInputError("");
-        signIn(email.trim(), password, captchaToken);
+
+        await signIn(email.trim(), password, captchaToken);
+
+        turnstileRef.current?.reset();
+        setCaptchaToken(null);
     }
 
     return(
@@ -99,6 +108,7 @@ const Auth = ()=>{
                 </div>
 
                 <Turnstile
+                    ref={turnstileRef}
                     siteKey={turnstileSiteKey}
                     onSuccess={(token) => setCaptchaToken(token)}
                     onExpire={() => setCaptchaToken(null)}
