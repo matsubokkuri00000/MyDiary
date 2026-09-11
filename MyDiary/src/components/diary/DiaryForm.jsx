@@ -7,10 +7,18 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
   const [diary_main, setMainDiary] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  
+/*
   const handleTitle = (event)=>{
     setTitle(event.target.value);
   }
+
+    const handleTitleKeyDown = (event) => {
+    if(event.key === "Enter"){
+      event.preventDefault();
+    }
+  }
+*/
+
   const handleMainDiary = (event)=>{
     setMainDiary(event.target.value);
   }
@@ -35,11 +43,6 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
     setMainDiary("");
   }
 
-  const handleTitleKeyDown = (event) => {
-    if(event.key === "Enter"){
-      event.preventDefault();
-    }
-  }
 
   return (
     <section className="diary-form-section">

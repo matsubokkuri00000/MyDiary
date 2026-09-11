@@ -12,9 +12,9 @@ import FutureMeterPage from "./pages/FutureMeterPage";
 
 
 function App (){
-  const { user, loading } = useContext(AuthContext);
+  const { user, authLoading } = useContext(AuthContext);
 
-  if(loading){
+  if(authLoading){
     return <p>認証情報を確認中...</p>
   }
 

@@ -35,15 +35,6 @@ const Sidebar = () =>{
                     <CalendarDays size={18}/>
                     Calendar
                 </NavLink>
-
-                <NavLink
-                    to="/futuremeter"
-                    className={({ isActive }) =>
-                        isActive ? "sidebar-link active" : "sidebar-link"
-                    }
-                >
-                    FutureMeter
-                </NavLink>
             </nav>
         </aside>
     )

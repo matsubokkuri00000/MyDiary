@@ -10,7 +10,8 @@ const Auth = ()=>{
     const [captchaToken, setCaptchaToken] = useState(null); 
     const [isSignUp, setIsSignUp] = useState(false);
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
-    const { errorMessage, signUp, signIn } = useContext(AuthContext);
+    const [successMessage, setSuccessMessage] = useState("");
+    const { errorMessage, actionLoading, signUp, signIn } = useContext(AuthContext);
 
     const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
     const turnstileRef = useRef(null);
@@ -28,10 +29,13 @@ const Auth = ()=>{
     const handleAuthModeChange = () => {
         setIsSignUp(!isSignUp);
         setInputError("");
+        setSuccessMessage("");
     }
 
     const handleSignUp = async (event) => {
         event.preventDefault();
+
+        setSuccessMessage("");
 
         if( !email.trim() || !password ){
             setInputError("メールアドレスとパスワードを入力してください");
@@ -56,7 +60,19 @@ const Auth = ()=>{
 
         setInputError("");
 
-        await signUp(email.trim(), password, captchaToken);
+        const success = await signUp(
+            email.trim(),
+            password,
+            captchaToken
+        )
+
+        console.log("signUp success:", success);
+
+        if(success){
+            setSuccessMessage(
+                "確認メールを送信しました。メールをご確認ください。"
+            )
+        }
 
         turnstileRef.current?.reset();
         setCaptchaToken(null);
@@ -125,9 +141,16 @@ const Auth = ()=>{
                                 {inputError}
                             </p>
                         )}
+
                         {errorMessage && (
                             <p className="auth-error">
                                 {errorMessage}
+                            </p>
+                        )}
+
+                        {successMessage && (
+                            <p className="auth-success">
+                                {successMessage}                                
                             </p>
                         )}
                     </div>
@@ -174,8 +197,15 @@ const Auth = ()=>{
                             <button
                                 className="auth-submit-button"
                                 type="submit"
+                                disabled={actionLoading || !captchaToken}
                             >
-                                {isSignUp ? "新規登録" : "ログイン"}
+                                {actionLoading
+                                    ? "処理中"
+                                    : isSignUp 
+                                        ? "新規登録" 
+                                        : "ログイン"
+                                }
+
                             </button>
 
                             <p className="auth-switch-text">

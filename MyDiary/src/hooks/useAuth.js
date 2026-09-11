@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 
 const useAuth = ()=>{
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    //const [loading, setLoading] = useState(true);
+    const [authLoading, setAuthLoading] = useState(true);
+    const [actionLoading, setActionLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
 
     //ログイン情報を取得
     const getCurrentUser = async ()=>{
 
         try {
-            setLoading(true);
+            //setLoading(true);
+            setAuthLoading(true);
             setErrorMessage("");
 
             const { data, error } = await supabase.auth.getUser();
@@ -39,7 +42,8 @@ const useAuth = ()=>{
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setLoading(false);
+            //setLoading(false);
+            setAuthLoading(false);
         }
     }
 
@@ -47,7 +51,8 @@ const useAuth = ()=>{
     const signUp = async (email, password, captchaToken)=>{
         
         try {
-            setLoading(true);
+            //setLoading(true);
+            setActionLoading(true);
             setErrorMessage("");
 
             const { error } = await supabase.auth.signUp({
@@ -56,19 +61,23 @@ const useAuth = ()=>{
                 options: {
                     captchaToken
                 }
-            })
+            });
 
             if(error){
                 console.log(error);
                 setErrorMessage("登録に失敗しました");
-                return;
-            }
+                return false;
+            };
             
+            return true;
+
         } catch (error) {
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
+            return false;
         } finally {
-            setLoading(false);
+            //setLoading(false);
+            setActionLoading(false);
         }
     }
     
@@ -76,7 +85,8 @@ const useAuth = ()=>{
     const signIn = async (email, password, captchaToken)=>{
 
         try {
-            setLoading(true);
+            //setLoading(true);
+            setActionLoading(true);
             setErrorMessage("");
 
             const { error } = await supabase.auth.signInWithPassword({
@@ -99,7 +109,8 @@ const useAuth = ()=>{
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setLoading(false);
+            //setLoading(false);
+            setActionLoading(false);
         }
     }
 
@@ -107,7 +118,8 @@ const useAuth = ()=>{
     const signOut = async ()=>{
 
         try {
-            setLoading(true);
+            //setLoading(true);
+            setActionLoading(true);
             setErrorMessage("");
 
             const { error } = await supabase.auth.signOut();
@@ -122,7 +134,8 @@ const useAuth = ()=>{
             console.log(error);
             setErrorMessage("予期しないエラーが発生しました");
         } finally {
-            setLoading(false);
+            //setLoading(false);
+            setActionLoading(false);
         }
 
     }
@@ -147,7 +160,8 @@ const useAuth = ()=>{
 
     return ({
         user,
-        loading,
+        authLoading,
+        actionLoading,
         errorMessage,
         getCurrentUser,
         signUp,
