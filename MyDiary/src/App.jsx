@@ -8,6 +8,7 @@ import Layout from "./layouts/Layout";
 import ToDoList from "./pages/ToDoList";
 import CalendarPage from "./pages/CalendarPage";
 import FutureMeterPage from "./pages/FutureMeterPage";
+import AccountPage from "./pages/AccountPage";
 
 
 
@@ -62,7 +63,7 @@ function App (){
             element={
               user 
                 ? <CalendarPage />
-                : <Navigate to="login"/>
+                : <Navigate to="/login"/>
             }
           />
 
@@ -71,7 +72,16 @@ function App (){
             element={
               user 
                 ? <FutureMeterPage />
-                : <Navigate to="login"/>
+                : <Navigate to="/login"/>
+            }
+          />
+
+          <Route 
+            path="/account"
+            element={
+              user 
+                ? <AccountPage />
+                : <Navigate to="/login" />
             }
           />
 
