@@ -1,7 +1,7 @@
 .diary-card {
     border: 1px solid var(--color-border);
     border-radius: 12px;
-    padding: 24px;
+    padding: 24px 12px;
 
     background-color: var(--color-surface);
 }
@@ -263,4 +263,55 @@
 .calendar-menu-delete:hover {
     border-color: #c0392b;
     color: #e57373;
+}
+
+
+@media (max-width: 768px) {
+
+    .calendar-page {
+        overflow-x: hidden;
+    }
+
+    .calendar-right,
+    .calendar-right-header,
+    .calendar-right-list,
+    .diary-card.calendar,
+    .calendar-diary-row {
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .calendar-right,
+    .calendar-right-list,
+    .diary-card.calendar,
+    .calendar-diary-row {
+        width: 100%;
+    }
+
+    .calendar-right {
+        overflow-x: hidden;
+    }
+
+    .calendar-right-list {
+        padding: 16px 6px 0;
+
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    .calendar-diary-row {
+        grid-template-columns: 32px minmax(0, 1fr) auto;
+        gap: 10px;
+    }
+
+    .calendar-diary-body {
+        min-width: 0;
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .calendar-diary-menu-wrapper {
+        min-width: 0;
+    }
 }
