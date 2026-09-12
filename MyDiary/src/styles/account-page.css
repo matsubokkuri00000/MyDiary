@@ -1,0 +1,71 @@
+.account-page {
+    width: 100%;
+    max-width: 720px;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    background-color: var(--color-surface);
+
+    padding: 24px 12px;
+    gap: 24px;
+}
+
+.account-header h2{
+    margin: 0;
+}
+
+.account-info h3,
+.account-data-manage h3,
+.account-manage h3 {
+    margin: 0 0 12px;
+}
+
+.account-info p,
+.account-data-manage p,
+.account-manage p {
+    margin: 0 0 16px;
+}
+
+.account-info,
+.account-data-manage,
+.account-manage {
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    
+    padding: 12px 12px;
+
+}
+
+.data-delete,
+.account-delete {
+    padding: 8px 24px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.account-delete-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.data-delete:hover,
+.account-delete:hover {
+    border-color: #c0392b;
+    color: #e57373;
+}
+
