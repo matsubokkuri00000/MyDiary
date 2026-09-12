@@ -1,12 +1,27 @@
 import { useState, useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
+import useAccount from "../hooks/useAccount";
+import Toast from "../components/toast/Toast";
 import "../styles/account-page.css"
 
 const AccountPage = () => {
     const [showDataDeleteConfirm, setShowDataDeleteConfirm] = useState(false);
+    const {
+        deleteLoading,
+        errorMessage,
+        successMessage,
+        deleteUserData,
+        clearSuccessMessage
+    } = useAccount();
     const { user } = useContext(AuthContext);
 
-    
+    const handleDeleteAllData = async () => {
+        const success = await deleteUserData();
+
+        if(success){
+            setShowDataDeleteConfirm(false);
+        }
+    }
 
     return (
         <>
@@ -80,18 +95,44 @@ const AccountPage = () => {
                         <div className="delete-buttons">
                             <button
                                 className="all-delete-button"
+                                onClick={handleDeleteAllData}
+                                disabled={deleteLoading}
                             >
-                                削除
+                                {deleteLoading ? "削除中..." : "削除"}
                             </button>
                             <button
                                 className="cancel-button"
                                 onClick={() => setShowDataDeleteConfirm(false)}
+                                disabled={deleteLoading}
                             >
                                 キャンセル
                             </button>
                         </div>
                     </div>
                 </div>            
+            )}
+
+            {successMessage && (
+                <div className="modal-overlay">
+                    <div className="delete-modal success-modal">
+                        <p>
+                            削除が完了しました
+                        </p>
+
+                        <p>
+                            {successMessage}
+                        </p>
+
+                        <div className="success-buttons">
+                            <button
+                                className="success-close-button"
+                                onClick={clearSuccessMessage}
+                            >
+                                閉じる
+                            </button>
+                        </div>
+                    </div>
+                </div>
             )}
         </>
     )
