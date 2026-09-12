@@ -5,3 +5,11 @@ export const deleteAllUserData = async () => {
 
     return {error};
 }
+
+export const deleteAccount = async () => {
+    const { data, error } = await supabase.functions.invoke(
+        "delete-account"
+    );
+
+    return { data, error };
+}

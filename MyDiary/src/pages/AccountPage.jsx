@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import useAccount from "../hooks/useAccount";
 import Toast from "../components/toast/Toast";
@@ -6,14 +7,17 @@ import "../styles/account-page.css"
 
 const AccountPage = () => {
     const [showDataDeleteConfirm, setShowDataDeleteConfirm] = useState(false);
+    const [showAccountDeleteConfirm, setShowAccountDeleteConfirm] = useState(false);
     const {
         deleteLoading,
+        accountDeleteLoading,
         errorMessage,
         successMessage,
         deleteUserData,
+        deleteUserAccount,
         clearSuccessMessage
     } = useAccount();
-    const { user } = useContext(AuthContext);
+    const { user, signOut } = useContext(AuthContext);
 
     const handleDeleteAllData = async () => {
         const success = await deleteUserData();
@@ -23,8 +27,23 @@ const AccountPage = () => {
         }
     }
 
+    const handleDeleteAccount = async () => {
+        const success = await deleteUserAccount();
+
+        if(success){
+            setShowAccountDeleteConfirm(false);
+
+            await signOut();
+
+            Navigate("/login");
+        }
+    }
+
     return (
         <>
+            <Toast
+                errorMessage={errorMessage}
+            />
             <article className="account-page">
                 <div className="account-header">
                     <h2>アカウント設定</h2>
@@ -74,6 +93,7 @@ const AccountPage = () => {
                     >
                         <button
                             className="account-delete"
+                            onClick={() => setShowAccountDeleteConfirm(true)}
                         >
                             アカウント削除
                         </button>
@@ -129,6 +149,42 @@ const AccountPage = () => {
                                 onClick={clearSuccessMessage}
                             >
                                 閉じる
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {showAccountDeleteConfirm && (
+                <div className="modal-overlay">
+                    <div className="delete-modal">
+                        <p>
+                            アカウントを削除します
+                        </p>
+
+                        <p>
+                            日記とToDoを含むすべてのデータが削除されます。
+                        </p>
+
+                        <p>
+                            この操作は取り消せません。
+                        </p>
+
+                        <div className="delete-buttons">
+                            <button
+                                className="all-delete-button"
+                                onClick={handleDeleteAccount}
+                                disabled={accountDeleteLoading}
+                            >
+                                {accountDeleteLoading ? "削除中..." : "アカウント削除"}
+                            </button>
+
+                            <button
+                                className="cancel-button"
+                                onClick={() => setShowAccountDeleteConfirm(false)}
+                                disabled={accountDeleteLoading}
+                            >
+                                キャンセル
                             </button>
                         </div>
                     </div>
