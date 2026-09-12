@@ -51,6 +51,12 @@ const ToDoList = () => {
         deleteTodo();
     }
 
+    const completedCount = tasks.filter(
+        (todo) => todo.is_completed
+    ).length;
+
+    const remainingCount = tasks.length - completedCount;
+
     return (
         <section className="todo-page">
             <Toast
@@ -66,6 +72,10 @@ const ToDoList = () => {
                     <>
                         <div className="todo-header">
                             <h1>ToDoリスト</h1>
+
+                            <p className="todo-count">
+                                残り {remainingCount} / {tasks.length}
+                            </p>
                         </div>
 
                         <div className="todo-form">
@@ -106,10 +116,20 @@ const ToDoList = () => {
                             )}
                         </div>
 
-                        <ToDos 
-                            todoList={tasks}
-                            handleToggle={handleToggle}
-                        />
+                        {tasks.length === 0
+                            ? (
+                                <div className="todo-empty">
+                                    <p>ToDoはありません</p>
+                                    <span>上の入力欄から、新しいToDoを追加してみましょう</span>
+                                </div>
+                            )
+                            : (
+                                <ToDos 
+                                    todoList={tasks}
+                                    handleToggle={handleToggle}
+                                />
+                            )
+                        }
                 </>
                 )
             }

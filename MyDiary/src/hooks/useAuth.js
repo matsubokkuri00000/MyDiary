@@ -59,7 +59,8 @@ const useAuth = ()=>{
                 email,
                 password,
                 options: {
-                    captchaToken
+                    captchaToken,
+                    emailRedirectTo: `${window.location.origin}/login`
                 }
             });
 
@@ -67,7 +68,7 @@ const useAuth = ()=>{
                 console.log(error);
                 setErrorMessage("登録に失敗しました");
                 return false;
-            };
+            }
             
             return true;
 

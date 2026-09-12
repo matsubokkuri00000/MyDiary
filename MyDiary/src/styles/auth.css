@@ -153,21 +153,19 @@
     margin-bottom: 18px;
 }
 
-.auth-error {
-    margin: 0 0 18px;
-
-    line-height: 1.5;
-    font-size: 0.8rem;
-
-    color: #f87171;
-}
-
+.auth-error,
 .auth-success {
     margin: 0;
 
     line-height: 1.5;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+}
 
+.auth-error {
+    color: #f87171;
+}
+
+.auth-success {
     color: #4ade80
 }
 

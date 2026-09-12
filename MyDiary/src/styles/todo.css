@@ -17,6 +17,21 @@
     background-color: var(--color-surface);
 }
 
+.todo-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.todo-count {
+    margin: 0;
+
+    font-size: 1rem;
+    font-weight: 600;
+    
+    color: var(--color-text-muted);
+}
+
 .todo-header h1 {
     margin: 0;
 }
@@ -135,6 +150,27 @@
     font-size: 0.85rem;
 
     color: var(--color-text-muted);
+}
+
+.todo-empty {
+    padding: 48px 24px;
+
+    text-align: center;
+
+    color: var(--color-text-muted);
+}
+
+.todo-empty p {
+    margin: 0 0 8px;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    color: var(--color-text);
+}
+
+.todo-empty span {
+    font-size: 0.9rem;
 }
 
 @media (max-width: 768px) {
