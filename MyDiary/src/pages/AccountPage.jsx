@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import useAccount from "../hooks/useAccount";
 import Toast from "../components/toast/Toast";
-import "../styles/account-page.css"
+import "../styles/account-page.css";
 
 const AccountPage = () => {
     const [showDataDeleteConfirm, setShowDataDeleteConfirm] = useState(false);
     const [showAccountDeleteConfirm, setShowAccountDeleteConfirm] = useState(false);
+
     const {
         deleteLoading,
         accountDeleteLoading,
@@ -17,33 +18,37 @@ const AccountPage = () => {
         deleteUserAccount,
         clearSuccessMessage
     } = useAccount();
+
     const { user, signOut } = useContext(AuthContext);
+
+    const navigate = useNavigate();
 
     const handleDeleteAllData = async () => {
         const success = await deleteUserData();
 
-        if(success){
+        if (success) {
             setShowDataDeleteConfirm(false);
         }
-    }
+    };
 
     const handleDeleteAccount = async () => {
         const success = await deleteUserAccount();
 
-        if(success){
+        if (success) {
             setShowAccountDeleteConfirm(false);
 
             await signOut();
 
-            Navigate("/login");
+            navigate("/login");
         }
-    }
+    };
 
     return (
         <>
             <Toast
                 errorMessage={errorMessage}
             />
+
             <article className="account-page">
                 <div className="account-header">
                     <h2>アカウント設定</h2>
@@ -68,9 +73,7 @@ const AccountPage = () => {
                         日記、ToDoのすべてのデータを削除します。
                     </p>
 
-                    <div
-                        className="account-delete-actions"
-                    >
+                    <div className="account-delete-actions">
                         <button
                             className="data-delete"
                             onClick={() => setShowDataDeleteConfirm(true)}
@@ -84,13 +87,13 @@ const AccountPage = () => {
                     <h3>
                         アカウント管理
                     </h3>
+
                     <p>
                         このアカウントを削除します。
                         この操作は取り消せません。
                     </p>
-                    <div
-                        className="account-delete-actions"
-                    >
+
+                    <div className="account-delete-actions">
                         <button
                             className="account-delete"
                             onClick={() => setShowAccountDeleteConfirm(true)}
@@ -107,10 +110,10 @@ const AccountPage = () => {
                         <p>
                             この操作は戻せません！
                         </p>
+
                         <p>
                             本当に削除しますか？
                         </p>
-
 
                         <div className="delete-buttons">
                             <button
@@ -120,6 +123,7 @@ const AccountPage = () => {
                             >
                                 {deleteLoading ? "削除中..." : "削除"}
                             </button>
+
                             <button
                                 className="cancel-button"
                                 onClick={() => setShowDataDeleteConfirm(false)}
@@ -129,7 +133,7 @@ const AccountPage = () => {
                             </button>
                         </div>
                     </div>
-                </div>            
+                </div>
             )}
 
             {successMessage && (
@@ -176,7 +180,10 @@ const AccountPage = () => {
                                 onClick={handleDeleteAccount}
                                 disabled={accountDeleteLoading}
                             >
-                                {accountDeleteLoading ? "削除中..." : "アカウント削除"}
+                                {accountDeleteLoading
+                                    ? "削除中..."
+                                    : "アカウント削除"
+                                }
                             </button>
 
                             <button
@@ -191,7 +198,7 @@ const AccountPage = () => {
                 </div>
             )}
         </>
-    )
-}
+    );
+};
 
 export default AccountPage;
