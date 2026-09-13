@@ -9,6 +9,8 @@ import ToDoList from "./pages/ToDoList";
 import CalendarPage from "./pages/CalendarPage";
 import FutureMeterPage from "./pages/FutureMeterPage";
 import AccountPage from "./pages/AccountPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import TermsPage from "./pages/TermsPage";
 
 
 
@@ -28,6 +30,16 @@ function App (){
               ? <Navigate to="/diary" />
               : <Navigate to="/login" />
           }
+        />
+
+        <Route
+          path="/privacy"
+          element={<PrivacyPolicyPage />}
+        />
+        
+        <Route
+            path="/terms"
+            element={<TermsPage />}
         />
 
         <Route 

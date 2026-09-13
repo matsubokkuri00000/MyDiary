@@ -71,7 +71,7 @@ const ToDoList = () => {
                 : (
                     <>
                         <div className="todo-header">
-                            <h1>ToDoリスト</h1>
+                            <h2>ToDoリスト</h2>
 
                             <p className="todo-count">
                                 残り {remainingCount} / {tasks.length}

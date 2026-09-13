@@ -1,0 +1,204 @@
+.account-page {
+    width: 100%;
+    max-width: 720px;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    background-color: var(--color-surface);
+
+    padding: 24px 12px;
+    gap: 24px;
+}
+
+/* ===== Account Header ===== */
+
+.account-header h2 {
+    margin: 0;
+}
+
+
+/* ===== Account Sections ===== */
+
+.account-info,
+.account-data-manage,
+.account-manage {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    padding: 12px;
+}
+
+.account-info h3,
+.account-data-manage h3,
+.account-manage h3 {
+    margin: 0 0 12px;
+}
+
+.account-info p,
+.account-data-manage p,
+.account-manage p {
+    margin: 0 0 16px;
+}
+
+
+/* ===== Account Page Buttons ===== */
+
+.account-delete-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.data-delete,
+.account-delete {
+    padding: 8px 24px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.data-delete:hover,
+.account-delete:hover {
+    border-color: #c0392b;
+    color: #e57373;
+}
+
+
+/* ===== Modal Overlay ===== */
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+
+    z-index: 1000;
+}
+
+
+/* ===== Modal ===== */
+
+.delete-modal {
+    display: flex;
+    flex-direction: column;
+
+    width: calc(100% - 32px);
+    max-width: 420px;
+
+    box-sizing: border-box;
+
+    padding: 12px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+
+    background-color: var(--color-surface);
+    color: var(--color-text);
+
+    gap: 24px;
+}
+
+.delete-modal p {
+    display: flex;
+    justify-content: center;
+
+    margin: 0 0 8px;
+}
+
+.delete-modal p:first-child {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
+/* ===== Modal Buttons ===== */
+
+.delete-modal button {
+    width: 100%;
+    min-width: 0;
+
+    padding: 8px 16px;
+
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+
+    background-color: var(--color-surface-light);
+    color: var(--color-text);
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+/* ===== Delete Confirm Modal ===== */
+
+.delete-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 24px;
+}
+
+.delete-modal .all-delete-button {
+    border-color: #c0392b;
+    color: #e57373;
+}
+
+.delete-modal .all-delete-button:hover {
+    border-color: #c0392b;
+    box-shadow: 0 0 10px #c0392b;
+}
+
+
+.cancel-button:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 10px var(--color-gold);
+}
+
+
+/* ===== Success Modal ===== */
+
+.success-buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.success-close-button:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 10px var(--color-gold);
+}
+
+
+/* ===== Responsive ===== */
+
+@media (max-width: 320px) {
+    .delete-buttons {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .delete-modal button {
+        width: 100%;
+        margin: 0;
+    }
+}
