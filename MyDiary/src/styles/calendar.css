@@ -307,13 +307,19 @@
         height: auto;
     }
 
-    .calendar-left {
-        padding: 16px;
+    .calendar-left,
+    .calendar-right {
+        border: none;
+        border-radius: 12px;
+        padding: 0;
+        background-color: transparent;
     }
 
-    .calendar-right {
-        overflow-y: visible;
+    .rdp-button_previous,
+    .rdp-button_next {
+        margin-right: 12px;
     }
+
 
     .rdp-day {
         height: 56px;

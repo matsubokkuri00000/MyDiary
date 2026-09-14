@@ -123,3 +123,13 @@
 
     color: var(--color-text-muted);
 }
+
+@media (max-width: 768px) {
+    .diary-form-section {
+        border: none;
+        border-radius: 0;
+        padding: 0px;
+        background-color: transparent;
+    }
+    
+}
