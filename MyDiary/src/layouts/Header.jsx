@@ -20,7 +20,7 @@ const Header = () => {
 
 
                 <div className="header-right">
-                    <p>ログイン中のユーザ：{user?.email}</p>
+
                     <button 
                         onClick={signOut}
                     >

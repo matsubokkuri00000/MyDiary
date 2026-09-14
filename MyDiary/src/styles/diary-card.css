@@ -248,11 +248,11 @@
 }
 
 .calendar-menu-edit {
-    transform: translate(-20px, -50px);
+    transform: translate(-30px, -50px);
 }
 
 .calendar-menu-delete {
-    transform: translate(30px, -50px);
+    transform: translate(20px, -50px);
 }
 
 .calendar-menu-edit:hover {

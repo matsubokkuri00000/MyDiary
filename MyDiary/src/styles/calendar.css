@@ -310,11 +310,11 @@
     .calendar-left,
     .calendar-right {
         border: none;
-        border-radius: 12px;
+        border-radius: 0;
         padding: 0;
         background-color: transparent;
     }
-
+    
     .rdp-button_previous,
     .rdp-button_next {
         margin-right: 12px;
@@ -350,4 +350,8 @@
     .calendar-right-list {
         overflow-y: visible;
     }
+    .calendar-right-header {
+        border: none;
+    }
+
 }

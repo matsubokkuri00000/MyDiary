@@ -180,6 +180,11 @@
         border-radius: 0px;
         padding: 0px;
         background-color: transparent;
+
+    }
+
+    .todo-page h2{
+        margin: 0;
     }
 
     .todo-form {
@@ -194,6 +199,6 @@
 
     .todo-add-button,
     .todo-delete-completed-button {
-        width: 50%;
+        width: 80%;
     }
 }
