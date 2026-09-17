@@ -248,11 +248,11 @@
 }
 
 .calendar-menu-edit {
-    transform: translate(-20px, -50px);
+    transform: translate(-30px, -50px);
 }
 
 .calendar-menu-delete {
-    transform: translate(30px, -50px);
+    transform: translate(20px, -50px);
 }
 
 .calendar-menu-edit:hover {
@@ -267,9 +267,14 @@
 
 
 @media (max-width: 768px) {
-
     .calendar-page {
         overflow-x: hidden;
+    }
+
+    .calendar-right {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
     }
 
     .calendar-right,
@@ -301,7 +306,7 @@
 
     .calendar-diary-row {
         grid-template-columns: 32px minmax(0, 1fr) auto;
-        gap: 10px;
+        gap: 8px;
     }
 
     .calendar-diary-body {
@@ -313,5 +318,13 @@
 
     .calendar-diary-menu-wrapper {
         min-width: 0;
+    }
+
+    .calendar-menu-edit {
+        transform: translate(-40px, -50px);
+    }
+
+    .calendar-menu-delete {
+        transform: translate(10px, -50px);
     }
 }

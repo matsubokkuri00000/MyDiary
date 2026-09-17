@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "../../styles/diary-form.css";
+import { Send } from "lucide-react";
 
 
 const DiaryForm = ({ handleAddDiary, addLoading })=>{
@@ -81,7 +82,8 @@ const DiaryForm = ({ handleAddDiary, addLoading })=>{
           type="submit"
           disabled={addLoading || isCooldown}
         >
-          {addLoading ? "保存中..." : "保存"}
+          <Send size={18} />
+          <span> {addLoading ? "保存中..." : "保存"}</span>
         </button>
 
       </form>

@@ -57,7 +57,7 @@
 
 .diary-submit-button {
     align-self: flex-end;
-    padding: 10px 24px;
+    padding: 8px 20px;
 
     border-radius: 8px;
 
@@ -68,6 +68,13 @@
     transition: 0.2s;
 
     cursor: pointer;
+}
+
+.diary-submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
 .diary-submit-button:hover {
@@ -122,4 +129,15 @@
     font-size: 0.85rem;
 
     color: var(--color-text-muted);
+}
+
+
+@media (max-width: 768px) {
+    .diary-form-section {
+        border: none;
+        border-radius: 0;
+        padding: 0px;
+        background-color: transparent;
+    }
+    
 }
