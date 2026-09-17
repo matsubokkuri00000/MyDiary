@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { LogOut, UserRound } from "lucide-react";
+import "../styles/header.css";
 
 const Header = () => {
     const {user, signOut, errorMessage, successMessage} = useContext(AuthContext);
@@ -20,18 +22,23 @@ const Header = () => {
 
 
                 <div className="header-right">
+                    <div className="header-actions">
+                        <button
+                            className="header-action-button"
+                            onClick={signOut}
+                        >   
+                            <LogOut size={18} />
+                            <span>ログアウト</span>
+                        </button>
 
-                    <button 
-                        onClick={signOut}
-                    >
-                        ログアウト
-                    </button>
-
-                    <button
-                        onClick={handleAccountPage}
-                    >
-                        アカウントページ
-                    </button>
+                        <button
+                            className="header-action-button"
+                            onClick={handleAccountPage}
+                        >
+                            <UserRound size={18} />
+                            <span>アカウント</span>
+                        </button>                        
+                    </div>
                 </div>
 
                 {errorMessage && <p>{errorMessage}</p>}
