@@ -62,6 +62,15 @@ const AccountPage = () => {
                     <p>
                         ログイン中のユーザ：{user?.email}
                     </p>
+
+                    <div className="account-logout-actions">
+                        <button
+                            className="account-logout"
+                            onClick={signOut}
+                        >
+                            ログアウト
+                        </button>
+                    </div>
                 </div>
 
                 <div className="account-data-manage">

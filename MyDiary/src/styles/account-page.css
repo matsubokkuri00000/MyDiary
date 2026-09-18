@@ -55,8 +55,11 @@
 }
 
 .data-delete,
-.account-delete {
+.account-delete,
+.account-logout {
     padding: 8px 24px;
+
+    width: 150px;
 
     border: 1px solid var(--color-border);
     border-radius: 8px;
@@ -70,11 +73,16 @@
 }
 
 .data-delete:hover,
-.account-delete:hover {
+.account-delete:hover,
+.account-logout:hover {
     border-color: #c0392b;
     color: #e57373;
 }
 
+.account-logout-actions {
+    display: flex;
+    justify-content: flex-end;
+}
 
 /* ===== Modal Overlay ===== */
 

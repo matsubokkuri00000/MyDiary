@@ -23,13 +23,6 @@ const Header = () => {
 
                 <div className="header-right">
                     <div className="header-actions">
-                        <button
-                            className="header-action-button"
-                            onClick={signOut}
-                        >   
-                            <LogOut size={18} />
-                            <span>ログアウト</span>
-                        </button>
 
                         <button
                             className="header-action-button"
